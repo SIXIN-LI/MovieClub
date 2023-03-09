@@ -16,7 +16,6 @@ public class Movies {
 
 	// used for both read from database and write to database
 	public Movies(String movieId, String title, Boolean isAdult, String year, int runtimeMinutes, movieGenre genre) {
-		super();
 		this.movieId = movieId;
 		this.title = title;
 		this.isAdult = isAdult;
