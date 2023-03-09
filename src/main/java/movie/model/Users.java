@@ -6,6 +6,7 @@ public class Users {
     protected int userId; // auto-increment id
     protected String firstName;
     protected String lastName;
+    protected String password;
     protected genderType gender;
 
     public enum genderType {
@@ -59,12 +60,21 @@ public class Users {
         this.gender = gender;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Override
     public String toString() {
         return "Users{" +
-            "user_id=" + userId +
-            ", first_name='" + firstName + '\'' +
-            ", last_name='" + lastName + '\'' +
+            "userId=" + userId +
+            ", firstName='" + firstName + '\'' +
+            ", lastName='" + lastName + '\'' +
+            ", password='" + password + '\'' +
             ", gender=" + gender +
             '}';
     }
@@ -79,11 +89,11 @@ public class Users {
         }
         Users users = (Users) o;
         return userId == users.userId && firstName.equals(users.firstName) && lastName.equals(
-            users.lastName) && gender == users.gender;
+            users.lastName) && password.equals(users.password) && gender == users.gender;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId, firstName, lastName, gender);
+        return Objects.hash(userId, firstName, lastName, password, gender);
     }
 }
