@@ -3,9 +3,9 @@ package movie.model;
 import java.util.Objects;
 
 public class Users {
-    protected int user_id; // auto-increment id
-    protected String first_name;
-    protected String last_name;
+    protected int userId; // auto-increment id
+    protected String firstName;
+    protected String lastName;
     protected genderType gender;
 
     public enum genderType {
@@ -13,42 +13,42 @@ public class Users {
     }
 
     // used for read from database
-    public Users(int user_id, String first_name, String last_name, genderType gender) {
-        this.user_id = user_id;
-        this.first_name = first_name;
-        this.last_name = last_name;
+    public Users(int userId, String firstName, String lastName, genderType gender) {
+        this.userId = userId;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.gender = gender;
     }
 
     // used for write to database while id will be set when created in dao
-    public Users(String first_name, String last_name, genderType gender) {
-        this.first_name = first_name;
-        this.last_name = last_name;
+    public Users(String firstName, String lastName, genderType gender) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.gender = gender;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getLast_name() {
-        return last_name;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public genderType getGender() {
@@ -62,9 +62,9 @@ public class Users {
     @Override
     public String toString() {
         return "Users{" +
-            "user_id=" + user_id +
-            ", first_name='" + first_name + '\'' +
-            ", last_name='" + last_name + '\'' +
+            "user_id=" + userId +
+            ", first_name='" + firstName + '\'' +
+            ", last_name='" + lastName + '\'' +
             ", gender=" + gender +
             '}';
     }
@@ -78,12 +78,12 @@ public class Users {
             return false;
         }
         Users users = (Users) o;
-        return user_id == users.user_id && first_name.equals(users.first_name) && last_name.equals(
-            users.last_name) && gender == users.gender;
+        return userId == users.userId && firstName.equals(users.firstName) && lastName.equals(
+            users.lastName) && gender == users.gender;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(user_id, first_name, last_name, gender);
+        return Objects.hash(userId, firstName, lastName, gender);
     }
 }
