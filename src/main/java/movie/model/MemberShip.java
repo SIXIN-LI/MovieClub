@@ -5,10 +5,10 @@ import java.util.Objects;
 
 public class MemberShip {
     protected String membershipId;
-    protected User user;
+    protected Users user;
     protected LocalDateTime timestamp;
 
-    public MemberShip(String membershipId, User user, LocalDateTime timestamp) {
+    public MemberShip(String membershipId, Users user, LocalDateTime timestamp) {
         this.membershipId = membershipId;
         this.user = user;
         this.timestamp = timestamp;
@@ -22,11 +22,11 @@ public class MemberShip {
         this.membershipId = membershipId;
     }
 
-    public User getUser() {
+    public Users getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(Users user) {
         this.user = user;
     }
 
