@@ -9,7 +9,6 @@ public class Crew {
 
 	// used for both read from database and write to database
 	public Crew(String crewId, String name, String birthYear, String deathYear, String primaryProfession) {
-		super();
 		this.crewId = crewId;
 		this.name = name;
 		this.birthYear = birthYear;
