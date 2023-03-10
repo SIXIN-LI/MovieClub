@@ -14,6 +14,11 @@ public class MemberShip {
         this.timestamp = timestamp;
     }
 
+    public MemberShip(Users user, LocalDateTime timestamp) {
+        this.user = user;
+        this.timestamp = timestamp;
+    }
+
     public String getMembershipId() {
         return membershipId;
     }
