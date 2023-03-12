@@ -29,8 +29,9 @@ public class MembershipDao {
         try {
             connection = connectionManager.getConnection();
             insertStmt = connection.prepareStatement(insertMember);
+            // the type shall also be consistent within the sql query
             insertStmt.setString(1, membership.getMembershipId());
-            insertStmt.setObject(2, membership.getUser());
+            insertStmt.setInt(2, membership.getUser().getUserId());
             insertStmt.setTimestamp(3, membership.getTimestamp());
             insertStmt.executeUpdate();
             return membership;
@@ -47,7 +48,7 @@ public class MembershipDao {
         }
     }
 
-    public MembershipDao getMemberFromUserName(Integer userId) throws SQLException {
+    public MemberShip getMemberFromUserName(Integer userId) throws SQLException {
         String selectMember = "SELECT membership_id,user_id,timestamp FROM Membership WHERE user_id =?;";
         Connection connection = null;
         PreparedStatement selectStmt = null;
