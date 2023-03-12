@@ -15,6 +15,12 @@ public class Rating {
         this.numOfVotes = numOfVotes;
     }
 
+    public Rating(Movies movie, Double averageRating, Integer numOfVotes) {
+        this.movie = movie;
+        this.averageRating = averageRating;
+        this.numOfVotes = numOfVotes;
+    }
+
     public Integer getRatingId() {
         return ratingId;
     }

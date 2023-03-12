@@ -1,20 +1,15 @@
 package movie.model;
 
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 import java.util.Objects;
 
 public class MemberShip {
     protected String membershipId;
     protected Users user;
-    protected LocalDateTime timestamp;
+    protected Timestamp timestamp;
 
-    public MemberShip(String membershipId, Users user, LocalDateTime timestamp) {
+    public MemberShip(String membershipId, Users user, Timestamp timestamp) {
         this.membershipId = membershipId;
-        this.user = user;
-        this.timestamp = timestamp;
-    }
-
-    public MemberShip(Users user, LocalDateTime timestamp) {
         this.user = user;
         this.timestamp = timestamp;
     }
@@ -35,11 +30,11 @@ public class MemberShip {
         this.user = user;
     }
 
-    public LocalDateTime getTimestamp() {
+    public Timestamp getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(LocalDateTime timestamp) {
+    public void setTimestamp(Timestamp timestamp) {
         this.timestamp = timestamp;
     }
 
