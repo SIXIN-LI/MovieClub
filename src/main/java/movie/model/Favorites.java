@@ -14,10 +14,13 @@ public class Favorites {
 	 * @param users
 	 */
 	public Favorites(int favoriteId, Movies movies, Users users) {
-		super();
 		this.favoriteId = favoriteId;
 		this.movies = movies;
 		this.users = users;
+	}
+
+  public Favorites(int favoriteId) {
+		this.favoriteId = favoriteId;
 	}
 
 
@@ -75,8 +78,4 @@ public class Favorites {
 	public String toString() {
 		return "Favorites [favoriteId=" + favoriteId + ", movies=" + movies + ", users=" + users + "]";
 	}
-	
-	
-
-	
 }
