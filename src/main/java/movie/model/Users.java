@@ -14,17 +14,19 @@ public class Users {
     }
 
     // used for read from database
-    public Users(int userId, String firstName, String lastName, genderType gender) {
+    public Users(int userId, String firstName, String lastName, String password, genderType gender) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.password = password;
         this.gender = gender;
     }
 
     // used for write to database while id will be set when created in dao
-    public Users(String firstName, String lastName, genderType gender) {
+    public Users(String firstName, String lastName, String password, genderType gender) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.password = password;
         this.gender = gender;
     }
 
