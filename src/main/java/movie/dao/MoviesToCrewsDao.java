@@ -29,7 +29,7 @@ public class MoviesToCrewsDao {
 
     // Users creates an MoviesToCrews, and then we will return a MovieToCrews Id
     public MoviesToCrews createMoviesToCrew(MoviesToCrews moviesToCrews) throws SQLException {
-        String insertMoviesToCrews = "INSERT INTO MoviesToCrews(movie_to_crew_id, movie_id, crew_id, job_category) VALUES(?,?,?,?);";
+        String insertMoviesToCrews = "INSERT INTO MovieToCrews(movie_to_crew_id, movie_id, crew_id, job_category) VALUES(?,?,?,?);";
         // try with automatic resource management will close these resources at the end
         try (Connection connection = connectionManager.getConnection();
              PreparedStatement insertStmt = connection.prepareStatement(insertMoviesToCrews,
@@ -37,8 +37,8 @@ public class MoviesToCrewsDao {
 
             // set parameters
             insertStmt.setInt(1, moviesToCrews.getMovieToCrewId());
-            insertStmt.setString(2, moviesToCrews.getCrew().getCrewId());
-            insertStmt.setString(3, moviesToCrews.getMovie().getMovieId());
+            insertStmt.setString(3, moviesToCrews.getCrew().getCrewId());
+            insertStmt.setString(2, moviesToCrews.getMovie().getMovieId());
             insertStmt.setString(4, moviesToCrews.getJobCategory().toString());
 
             // load into database
@@ -61,7 +61,7 @@ public class MoviesToCrewsDao {
     }
 
     public MoviesToCrews getMoviesToCrewsById(int movieToCrewId) throws SQLException {
-        String select = "SELECT movie_id, crew_id, job_category FROM MoviesToCrews WHERE movie_to_crew_id=?;";
+        String select = "SELECT movie_id, crew_id, job_category FROM MovieToCrews WHERE movie_to_crew_id=?;";
         try (Connection connection = connectionManager.getConnection();
              PreparedStatement selectStmt = connection.prepareStatement(select)) {
             selectStmt.setInt(1, movieToCrewId);
@@ -73,7 +73,7 @@ public class MoviesToCrewsDao {
 
                 Crew crew = CrewDao.getInstance().getCrewByCrewId(crewId);
                 Movies movie = MoviesDao.getInstance().getMovieByMovieId(movieId);
-                MoviesToCrews moviesToCrews = new MoviesToCrews(movieToCrewId, movie, crew, MoviesToCrews.JobCategory.valueOf(jobCategory));
+                MoviesToCrews moviesToCrews = new MoviesToCrews(movieToCrewId, movie, crew, MoviesToCrews.JobCategory.valueOf(jobCategory.toUpperCase()));
                 return moviesToCrews;
             }
         } catch (SQLException e) {
