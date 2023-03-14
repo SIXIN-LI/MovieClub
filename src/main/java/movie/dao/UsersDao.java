@@ -90,6 +90,7 @@ public class UsersDao {
         }
     }
 
+    // Used for inside calls
     public Users getUserByUserId(int userId) throws SQLException {
         String selectCompany = "SELECT user_name, password, first_name, last_name, gender FROM Users WHERE user_id=?;";
 
@@ -114,4 +115,41 @@ public class UsersDao {
         }
         return null;
     }
+
+    /**
+     * Find user by its username and a matched password
+     *
+     * Used when a user try to log in with username and password
+     *     where all of his/her info will be stored in the frontend
+     *
+     * @return an existing user in our database
+     */
+    public Users getUserByUserNameAndPassword(String username, String password)
+        throws SQLException {
+        String selectCompany = "SELECT user_id, first_name, last_name, gender FROM Users "
+            + "WHERE user_name=? and password=?;";
+
+        try (Connection connection = connectionManager.getConnection();
+            PreparedStatement selectStmt = connection.prepareStatement(selectCompany)) {
+            selectStmt.setString(1, username);
+            selectStmt.setString(2, password);
+            // get credit card from database
+            ResultSet results = selectStmt.executeQuery();
+            if (results.next()) {
+                int userId = results.getInt("user_id");
+                String firstName = results.getString("first_name");
+                String lastName = results.getString("last_name");
+                Users.genderType gender = Users.genderType.valueOf(results.getString("gender"));
+                Users user = new Users(userId, username, password, firstName, lastName, gender);
+
+                return user;
+            } else {
+                return null; // This means this user doesn't exist in our database
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
 }
