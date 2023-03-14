@@ -30,17 +30,19 @@ public class UsersDao {
     }
 
 
+    // User create an account, and then we will return a user_id as the login username
     public Users createUser(Users user) throws SQLException {
-        String insertUser = "INSERT INTO Users(first_name, last_name, password, gender) VALUES(?,?,?,?);";
+        String insertUser = "INSERT INTO Users(user_name, password, first_name, last_name, gender) VALUES(?,?,?,?,?);";
         // try with automatic resource management will close these resources at the end
         try (Connection connection = connectionManager.getConnection();
             PreparedStatement insertStmt = connection.prepareStatement(insertUser,
                 Statement.RETURN_GENERATED_KEYS)) {
             // set parameters
-            insertStmt.setString(1, user.getFirstName());
-            insertStmt.setString(2, user.getLastName());
-            insertStmt.setString(3, user.getPassword());
-            insertStmt.setString(4, user.getGender().toString());
+            insertStmt.setString(1, user.getUserName());
+            insertStmt.setString(2, user.getPassword());
+            insertStmt.setString(3, user.getFirstName());
+            insertStmt.setString(4, user.getLastName());
+            insertStmt.setString(5, user.getGender().toString());
 
             // load into database
             insertStmt.executeUpdate();
@@ -68,14 +70,16 @@ public class UsersDao {
      */
     public boolean updateUserByOneParam(Users user)
         throws SQLException {
-        String updateUser = "UPDATE Users SET first_name=?, last_name=?, password=?, gender=? WHERE user_id=?;";
+        String updateUser = "UPDATE Users SET user_name=?, password=?, first_name=?, last_name=?, gender=? WHERE user_id=?;";
         try (Connection connection = connectionManager.getConnection();
             PreparedStatement updateStmt = connection.prepareStatement(updateUser)) {
 
-            updateStmt.setString(1, user.getFirstName());
-            updateStmt.setString(2, user.getLastName());
-            updateStmt.setString(3, user.getPassword());
-            updateStmt.setString(4, user.getGender().toString());
+            updateStmt.setString(1, user.getUserName());
+            updateStmt.setString(2, user.getPassword());
+            updateStmt.setString(3, user.getFirstName());
+            updateStmt.setString(4, user.getLastName());
+            updateStmt.setString(5, user.getGender().toString());
+            updateStmt.setInt(6, user.getUserId());
             int affectedRows = updateStmt.executeUpdate();
 
             if (affectedRows != 0) return true;
@@ -87,7 +91,7 @@ public class UsersDao {
     }
 
     public Users getUserByUserId(int userId) throws SQLException {
-        String selectCompany = "SELECT first_name, last_name, password, gender FROM Users WHERE user_id=?;";
+        String selectCompany = "SELECT user_name, password, first_name, last_name, gender FROM Users WHERE user_id=?;";
 
         try (Connection connection = connectionManager.getConnection();
             PreparedStatement selectStmt = connection.prepareStatement(selectCompany)) {
@@ -95,11 +99,12 @@ public class UsersDao {
             // get credit card from database
             ResultSet results = selectStmt.executeQuery();
             if (results.next()) {
+                String userName = results.getString("user_name");
+                String password = results.getString("password");
                 String firstName = results.getString("first_name");
                 String lastName = results.getString("last_name");
-                String password = results.getString("password");
                 Users.genderType gender = Users.genderType.valueOf(results.getString("gender"));
-                Users user = new Users(userId, firstName, lastName, password, gender);
+                Users user = new Users(userId, userName, password, firstName, lastName, gender);
 
                 return user;
             }
