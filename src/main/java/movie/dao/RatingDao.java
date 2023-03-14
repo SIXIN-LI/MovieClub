@@ -49,7 +49,11 @@ public class RatingDao {
         }
     }
 
+<<<<<<< HEAD
     public Rating getRatingFromMovieId(String movieId) throws SQLException {
+=======
+    public Rating getRatingFromMovieId(Integer movieId) throws SQLException {
+>>>>>>> 99ec68a8957b340ce5bcbca72a0b97d5a50182d2
         String selectRating = "SELECT rating_id, movie_id, average_rating, num_votes FROM Rating WHERE movie_id =?;";
         Connection connection = null;
         PreparedStatement selectStmt = null;
@@ -57,14 +61,23 @@ public class RatingDao {
         try {
             connection = connectionManager.getConnection();
             selectStmt = connection.prepareStatement(selectRating);
+<<<<<<< HEAD
             selectStmt.setString(1, movieId);
+=======
+            selectStmt.setInt(1, movieId);
+>>>>>>> 99ec68a8957b340ce5bcbca72a0b97d5a50182d2
             results = selectStmt.executeQuery();
             if (results.next()) {
                 Integer ratingId = results.getInt("rating_id");
                 Double avgRating = results.getDouble("average_rating");
                 Integer numOfVotes = results.getInt("num_votes");
 
+<<<<<<< HEAD
                 MoviesDao moviesDao = MoviesDao.getInstance();
+=======
+                // Todo: depend on MoviesDao
+                Movies moviesDao = MoviesDao.getInstance();
+>>>>>>> 99ec68a8957b340ce5bcbca72a0b97d5a50182d2
                 Movies movie = moviesDao.getMovieByMovieId(movieId);
                 Rating rating = new Rating(ratingId, movie, avgRating, numOfVotes);
                 return rating;
