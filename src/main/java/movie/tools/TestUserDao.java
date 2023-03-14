@@ -18,6 +18,12 @@ public class TestUserDao {
             System.out.println("matched got");
         }
 
+        // test data match in database
+        Users gotUser3 = usersDao.getUserByUserId(1);
+        if (gotUser3.getFirstName().equals("Kennedy")) {
+            System.out.println("data match");
+        }
+
         user.setFirstName("Cece");
         usersDao.updateUserByOneParam(user);
 
