@@ -72,7 +72,7 @@ public class MoviesToCrewsDao {
                 String jobCategory = results.getString("job_category");
 
                 Crew crew = CrewDao.getInstance().getCrewByCrewId(crewId);
-                Movies movie = MovieDao.getInstance().getMoveiByMovieId(movieId);
+                Movies movie = MoviesDao.getInstance().getMovieByMovieId(movieId);
                 MoviesToCrews moviesToCrews = new MoviesToCrews(movieToCrewId, movie, crew, MoviesToCrews.JobCategory.valueOf(jobCategory));
                 return moviesToCrews;
             }

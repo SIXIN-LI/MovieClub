@@ -69,12 +69,12 @@ public class IntentionsDao {
             ResultSet results = selectStmt.executeQuery();
             if (results.next()) {
                 int userId = results.getInt("user_id");
-                int movieId = results.getInt("movie_id");
+                String movieId = results.getString("movie_id");
                 Timestamp intentionTimestamp = results.getTimestamp("intention_timestamp");
                 String action = results.getString("action");
 
                 Users user = UsersDao.getInstance().getUserByUserId(userId);
-                Movies movie = MovieDao.getInstance().getMovieByMovieId(movieId);
+                Movies movie = MoviesDao.getInstance().getMovieByMovieId(movieId);
                 Intentions intentions = new Intentions(intentionId, user, movie, intentionTimestamp, Intentions.Action.valueOf(action));
                 return intentions;
             }

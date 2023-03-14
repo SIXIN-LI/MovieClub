@@ -34,9 +34,9 @@ import java.util.Properties;
 public class ConnectionManager {
 
 	// User to connect to your database instance. By default, this is "root2".
-	private final String user = System.getenv("MYSQL_USERNAME");
+	private final String user = "root";
 	// Password for the user. By default, it seems no password.
-	private final String password = System.getenv("MYSQL_PASSWORD");
+	private final String password = "12345678";
 	// URI to your database server. If running on the same machine, then this is "localhost".
 	private final String hostName = "localhost";
 	// Port to your database server. By default, this is 3307.
