@@ -30,6 +30,7 @@ public class KnownMovieDao {
     public List<Movies> getKnownMoviesByCrewId(String crewId) throws SQLException {
         List<Movies> list = new ArrayList<>();
         String selectCompany = "SELECT movie_id FROM KnownMovies WHERE crew_id=?;";
+        MoviesDao moviesDao = MoviesDao.getInstance();
 
         try (Connection connection = connectionManager.getConnection();
             PreparedStatement selectStmt = connection.prepareStatement(selectCompany)) {
@@ -38,7 +39,7 @@ public class KnownMovieDao {
             ResultSet results = selectStmt.executeQuery();
             while (results.next()) {
                 String movieId = results.getString("movie_id");
-                Movies movie = null;
+                Movies movie = moviesDao.getMovieByMovieId(movieId);
 
                 list.add(movie);
             }
