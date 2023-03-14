@@ -15,6 +15,13 @@ public class MoviesToCrews {
         this.jobCategory = jobCategory;
     }
 
+    public MoviesToCrews(Movies movie, Crew crew, JobCategory jobCategory) {
+        this.movieToCrewId = movieToCrewId;
+        this.movie = movie;
+        this.crew = crew;
+        this.jobCategory = jobCategory;
+    }
+
     // Getters and Setters
 
     public int getMovieToCrewId() {

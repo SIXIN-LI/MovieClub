@@ -19,6 +19,14 @@ public class Intentions {
         this.action = action;
     }
 
+    public Intentions(Users user, Movies movie, Timestamp timestamp, Action action) {
+        this.intentionId = intentionId;
+        this.user = user;
+        this.movie = movie;
+        this.timestamp = timestamp;
+        this.action = action;
+    }
+
     // Getters and Setters
 
     public int getIntentionId() {
