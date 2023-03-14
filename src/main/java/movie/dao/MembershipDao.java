@@ -48,7 +48,7 @@ public class MembershipDao {
         }
     }
 
-    public MemberShip getMemberFromUserName(Integer userId) throws SQLException {
+    public MemberShip getMemberFromUserId(Integer userId) throws SQLException {
         String selectMember = "SELECT membership_id,user_id,timestamp FROM Membership WHERE user_id =?;";
         Connection connection = null;
         PreparedStatement selectStmt = null;
@@ -63,14 +63,8 @@ public class MembershipDao {
                 Integer usersId = results.getInt("user_id");
                 Timestamp timestamp = results.getTimestamp("timestamp");
 
-<<<<<<< HEAD
                 UsersDao usersDao = UsersDao.getInstance();
                 Users user = usersDao.getUserByUserId(usersId);
-=======
-                // Todo: depend on usersdao
-                Users usersDao = UsersDao.getInstance();
-                Users user = usersDao.getUserFromUserId(usersId);
->>>>>>> 99ec68a8957b340ce5bcbca72a0b97d5a50182d2
                 MemberShip member = new MemberShip(membershipId, user, timestamp);
                 return member;
             }
