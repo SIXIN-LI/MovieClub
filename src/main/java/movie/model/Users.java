@@ -4,9 +4,10 @@ import java.util.Objects;
 
 public class Users {
     protected int userId; // auto-increment id
+    protected String userName;
+    protected String password;
     protected String firstName;
     protected String lastName;
-    protected String password;
     protected genderType gender;
 
     public enum genderType {
@@ -14,8 +15,9 @@ public class Users {
     }
 
     // used for read from database
-    public Users(int userId, String firstName, String lastName, String password, genderType gender) {
+    public Users(int userId, String userName, String password, String firstName, String lastName, genderType gender) {
         this.userId = userId;
+        this.userName = userName;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
@@ -23,7 +25,8 @@ public class Users {
     }
 
     // used for write to database while id will be set when created in dao
-    public Users(String firstName, String lastName, String password, genderType gender) {
+    public Users(String userName, String password, String firstName, String lastName, genderType gender) {
+        this.userName = userName;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
@@ -70,15 +73,12 @@ public class Users {
         this.password = password;
     }
 
-    @Override
-    public String toString() {
-        return "Users{" +
-            "userId=" + userId +
-            ", firstName='" + firstName + '\'' +
-            ", lastName='" + lastName + '\'' +
-            ", password='" + password + '\'' +
-            ", gender=" + gender +
-            '}';
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     @Override
@@ -90,12 +90,25 @@ public class Users {
             return false;
         }
         Users users = (Users) o;
-        return userId == users.userId && firstName.equals(users.firstName) && lastName.equals(
-            users.lastName) && password.equals(users.password) && gender == users.gender;
+        return userId == users.userId && userName.equals(users.userName) && password.equals(
+            users.password) && firstName.equals(users.firstName) && lastName.equals(users.lastName)
+            && gender == users.gender;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId, firstName, lastName, password, gender);
+        return Objects.hash(userId, userName, password, firstName, lastName, gender);
+    }
+
+    @Override
+    public String toString() {
+        return "Users{" +
+            "userId=" + userId +
+            ", userName='" + userName + '\'' +
+            ", password='" + password + '\'' +
+            ", firstName='" + firstName + '\'' +
+            ", lastName='" + lastName + '\'' +
+            ", gender=" + gender +
+            '}';
     }
 }
