@@ -103,7 +103,9 @@ public class UsersDao {
                 String password = results.getString("password");
                 String firstName = results.getString("first_name");
                 String lastName = results.getString("last_name");
-                Users.genderType gender = Users.genderType.valueOf(results.getString("gender"));
+
+                String genderStr = results.getString("gender");
+                Users.genderType gender = Users.genderType.valueOf(genderStr.trim());
                 Users user = new Users(userId, userName, password, firstName, lastName, gender);
 
                 return user;
