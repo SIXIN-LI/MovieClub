@@ -49,7 +49,7 @@ public class RatingDao {
         }
     }
 
-    public Rating getRatingFromMovieId(Integer movieId) throws SQLException {
+    public Rating getRatingFromMovieId(String movieId) throws SQLException {
         String selectRating = "SELECT rating_id, movie_id, average_rating, num_votes FROM Rating WHERE movie_id =?;";
         Connection connection = null;
         PreparedStatement selectStmt = null;
@@ -57,15 +57,14 @@ public class RatingDao {
         try {
             connection = connectionManager.getConnection();
             selectStmt = connection.prepareStatement(selectRating);
-            selectStmt.setInt(1, movieId);
+            selectStmt.setString(1, movieId);
             results = selectStmt.executeQuery();
             if (results.next()) {
                 Integer ratingId = results.getInt("rating_id");
                 Double avgRating = results.getDouble("average_rating");
                 Integer numOfVotes = results.getInt("num_votes");
 
-                // Todo: depend on MoviesDao
-                Movies moviesDao = MoviesDao.getInstance();
+                MoviesDao moviesDao = MoviesDao.getInstance();
                 Movies movie = moviesDao.getMovieByMovieId(movieId);
                 Rating rating = new Rating(ratingId, movie, avgRating, numOfVotes);
                 return rating;

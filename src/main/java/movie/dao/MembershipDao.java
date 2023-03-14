@@ -63,9 +63,8 @@ public class MembershipDao {
                 Integer usersId = results.getInt("user_id");
                 Timestamp timestamp = results.getTimestamp("timestamp");
 
-                // Todo: depend on usersdao
-                Users usersDao = UsersDao.getInstance();
-                Users user = usersDao.getUserFromUserId(usersId);
+                UsersDao usersDao = UsersDao.getInstance();
+                Users user = usersDao.getUserByUserId(usersId);
                 MemberShip member = new MemberShip(membershipId, user, timestamp);
                 return member;
             }
