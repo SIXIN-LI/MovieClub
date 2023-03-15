@@ -1,4 +1,4 @@
-package movie.dao;
+package src.main.java.movie.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
