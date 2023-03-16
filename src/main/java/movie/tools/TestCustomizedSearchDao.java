@@ -5,9 +5,7 @@ import java.util.List;
 
 
 import movie.dao.CustomizedSearchDao;
-import movie.dao.MoviesDao;
-import movie.dao.RatingDao;
-import movie.model.Rating;
+
 import movie.model.Movies;
 
 public class TestCustomizedSearchDao {
@@ -17,19 +15,26 @@ public class TestCustomizedSearchDao {
 		// READ
 		// read movies
 
-		List<Movies> yearAndGenreMovies = customizedSearchDao.getMoviesByGenreAndYear("crime", "2022");
-		for (Movies ygm : yearAndGenreMovies) {
-			System.out.format("looping movies of year 2022 and genre is 'crime': movie:%s genre:%s year:%s \n",
-					ygm.getTitle(), ygm.getGenre(), ygm.getYear());
-		}
-//	
-//		
+	
 		List<Movies> ratingAndGenreMovies = customizedSearchDao.getMoviesByRatingAndGenre("crime", 9.2);
 		for (Movies rgm : ratingAndGenreMovies) {
 			System.out.format("looping movies of rating>9.7 and genre is 'crime': movie:%s genre:%s long:%d \n",
 					rgm.getTitle(), rgm.getGenre(), rgm.getRuntimeMinutes());
 		}
-//	
-
+		
+	
+		List<Movies> genreMovies = customizedSearchDao.getMoviesByGenre("crime");
+		for (Movies gm : genreMovies) {
+			System.out.format("looping movies whose genre is 'crime': movie:%s genre:%s long:%d \n",
+					gm.getTitle(), gm.getGenre(), gm.getRuntimeMinutes());
+		}
+		
+		
+		List<Movies> ratingMovies = customizedSearchDao.getMoviesByRate(9.7);
+		for (Movies rm : ratingMovies) {
+			System.out.format("looping movies whose rating is 9.7': movie:%s genre:%s long:%d \n",
+					rm.getTitle(), rm.getGenre(), rm.getRuntimeMinutes());
+		}
+		
 	}
 }
