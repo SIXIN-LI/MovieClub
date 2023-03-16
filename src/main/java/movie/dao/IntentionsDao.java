@@ -75,7 +75,7 @@ public class IntentionsDao {
 
                 Users user = UsersDao.getInstance().getUserByUserId(userId);
                 Movies movie = MoviesDao.getInstance().getMovieByMovieId(movieId);
-                Intentions intentions = new Intentions(intentionId, user, movie, intentionTimestamp, Intentions.Action.valueOf(action));
+                Intentions intentions = new Intentions(intentionId, user, movie, intentionTimestamp, Intentions.Action.valueOf(action.toUpperCase()));
                 return intentions;
             }
         } catch (SQLException e) {

@@ -20,7 +20,6 @@ public class Intentions {
     }
 
     public Intentions(Users user, Movies movie, Timestamp timestamp, Action action) {
-        this.intentionId = intentionId;
         this.user = user;
         this.movie = movie;
         this.timestamp = timestamp;

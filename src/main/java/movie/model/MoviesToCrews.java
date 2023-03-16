@@ -16,7 +16,6 @@ public class MoviesToCrews {
     }
 
     public MoviesToCrews(Movies movie, Crew crew, JobCategory jobCategory) {
-        this.movieToCrewId = movieToCrewId;
         this.movie = movie;
         this.crew = crew;
         this.jobCategory = jobCategory;
