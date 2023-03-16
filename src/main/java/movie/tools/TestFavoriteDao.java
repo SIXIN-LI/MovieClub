@@ -20,11 +20,11 @@ public class TestFavoriteDao {
     Users user = usersDao.getUserByUserId(1);
     Favorites favorite = new Favorites(movie, user);
 
-    favorite = favoritesDao.create(favorite);
+//    favorite = favoritesDao.create(favorite);
 
     Favorites favorite1 = favoritesDao.getFavoriteById(1);
     System.out.format("Reading Favorites: f:%s m:%s u:%s \n",
-        favorite.getFavoriteId(), favorite.getMovies().getMovieId(), favorite.getUsers().getUserId());
+        favorite1.getFavoriteId(), favorite1.getMovies().getMovieId(), favorite1.getUsers().getUserId());
 
     //getFavoritesByUserId
     List<Favorites> favoriteList = favoritesDao.getFavoritesByUserId(1);
