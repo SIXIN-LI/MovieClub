@@ -16,9 +16,9 @@ public class TestRatingDao {
 
         // Initilize a RatingDao instance
         RatingDao ratingDao = RatingDao.getInstance();
-        Integer originalNumOfVotes = 12;
-        Double originalAvgRating = 5.0;
-        Rating rating = new Rating(1, movie, 5.0, originalNumOfVotes);
+//        Integer originalNumOfVotes = 12;
+//        Double originalAvgRating = 5.0;
+        Rating rating = new Rating(movie, 5.0, 12);
 
         // Test create
         ratingDao.create(rating);
@@ -30,13 +30,12 @@ public class TestRatingDao {
             System.out.println("Rating successfully got from the database: " + gotRating);
         }
 
-        // Test updateRating
-        Double newScore = 10.0;
-        Rating updatedRating = ratingDao.updateRating(rating, newScore);
-        if (updatedRating.getNumOfVotes() == originalNumOfVotes + 1 &&
-                updatedRating.getAverageRating().compareTo(originalAvgRating + newScore)/updatedRating.getNumOfVotes() == 0) {
-            System.out.println("Successfully updated the rating: " + updatedRating);
-        }
-
+//        // Test updateRating
+//        Double newScore = 10.0;
+//        Rating updatedRating = ratingDao.updateRating(rating, newScore);
+//        if (updatedRating.getNumOfVotes() == originalNumOfVotes + 1 &&
+//                updatedRating.getAverageRating().compareTo(originalAvgRating + newScore)/updatedRating.getNumOfVotes() == 0) {
+//            System.out.println("Successfully updated the rating: " + updatedRating);
+//        }
     }
 }

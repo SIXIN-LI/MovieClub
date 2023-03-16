@@ -20,7 +20,7 @@ public class TestMembershipDao {
         // Initilize a MembershipDao instance
         MembershipDao membershipDao = MembershipDao.getInstance();
         Timestamp timestamp = Timestamp.valueOf("2007-09-23 10:10:10.0");
-        MemberShip memberShip = new MemberShip("14519895", user, timestamp);
+        MemberShip memberShip = new MemberShip(user, timestamp);
 
         // Test create
         membershipDao.create(memberShip);
