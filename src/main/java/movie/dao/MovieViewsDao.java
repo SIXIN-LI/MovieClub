@@ -76,18 +76,62 @@ public class MovieViewsDao {
 		return movieViews;
 	}
 	
+	public List<MovieViews> getMovieViewsByUserId(Users user) throws SQLException {
+		List<MovieViews> movieViews = new ArrayList<MovieViews>();
+		String selectMovieViews ="SELECT \n"
+				+ "	MovieViews.* \n"
+				+ "FROM MovieViews\n"
+				+ "WHERE MovieViews.user_id=?;";
+		
+		Connection connection = null;
+		PreparedStatement selectStmt = null;
+		ResultSet results = null;
+		try {
+			connection = connectionManager.getConnection();
+			selectStmt = connection.prepareStatement(selectMovieViews);
+			selectStmt.setInt(1, user.getUserId());
+			results = selectStmt.executeQuery();
+			UsersDao usersDao = UsersDao.getInstance();
+			MoviesDao moviesDao = MoviesDao.getInstance();
+			if (results.next()) {
+				int resultviewId = results.getInt("view_id");
+				int  userId = results.getInt("user_id");
+				Users resultuser = usersDao.getUserByUserId(userId);
+				String movieId = results.getString("movie_id");
+				Movies resultmovie = moviesDao.getMovieByMovieId(movieId);
+				Date viewTime = new Date(results.getTimestamp("view_time").getTime());
+				MovieViews newMovieView = new MovieViews(resultviewId,resultuser,resultmovie,viewTime);
+			
+				movieViews.add(newMovieView);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if (connection != null) {
+				connection.close();
+			}
+			if (selectStmt != null) {
+				selectStmt.close();
+			}
+			if (results != null) {
+				results.close();
+			}
+		}
+		return movieViews;
+	}
+	
 	
 // delete movieView 
 
-	public MovieViews delete(MovieViews movieView,Users user) throws SQLException {
-		String deleteMovieView = "DELETE FROM MovieViews WHERE user_id=? and view_id=?;";
+	public MovieViews delete(MovieViews movieView) throws SQLException {
+		String deleteMovieView = "DELETE FROM MovieViews WHERE view_id=?;";
 		Connection connection = null;
 		PreparedStatement deleteStmt = null;
 		try {
 			connection = connectionManager.getConnection();
 			deleteStmt = connection.prepareStatement(deleteMovieView);
 			deleteStmt.setInt(1, movieView.getViewId());
-			deleteStmt.setInt(2, user.getUserId());
 			deleteStmt.executeUpdate();
 
 			// Return null so the caller can no longer operate on the BlogComments instance.
