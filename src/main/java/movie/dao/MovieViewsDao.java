@@ -79,14 +79,15 @@ public class MovieViewsDao {
 	
 // delete movieView 
 
-	public MovieViews delete(MovieViews movieView) throws SQLException {
-		String deleteMovieView = "DELETE FROM MovieViews WHERE view_id=?;";
+	public MovieViews delete(MovieViews movieView,Users user) throws SQLException {
+		String deleteMovieView = "DELETE FROM MovieViews WHERE user_id=? and view_id=?;";
 		Connection connection = null;
 		PreparedStatement deleteStmt = null;
 		try {
 			connection = connectionManager.getConnection();
 			deleteStmt = connection.prepareStatement(deleteMovieView);
 			deleteStmt.setInt(1, movieView.getViewId());
+			deleteStmt.setInt(2, user.getUserId());
 			deleteStmt.executeUpdate();
 
 			// Return null so the caller can no longer operate on the BlogComments instance.
