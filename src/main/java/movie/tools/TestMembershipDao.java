@@ -31,6 +31,11 @@ public class TestMembershipDao {
         if (gotMember.equals(memberShip)) {
             System.out.println("Membership successfully got from the database: " + gotMember);
         }
+
+        // Test getMemberFromUserName - when user doesn't have membership
+        MemberShip gotMember1 = membershipDao.getMemberFromUserId(0);
+        if (gotMember1 == null) {
+            System.out.println("When a user doesn't exist or doesn't have membership, expect to return " + gotMember1);
+        }
     }
 }
-
