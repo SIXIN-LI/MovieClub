@@ -30,7 +30,6 @@ public class MembershipDao {
             connection = connectionManager.getConnection();
             insertStmt = connection.prepareStatement(insertMember, Statement.RETURN_GENERATED_KEYS);
             // the type shall also be consistent within the sql query
-//            insertStmt.setInt(1, membership.getMembershipId());
             insertStmt.setInt(1, membership.getUser().getUserId());
             insertStmt.setTimestamp(2, membership.getTimestamp());
             insertStmt.executeUpdate();

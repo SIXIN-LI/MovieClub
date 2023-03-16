@@ -30,10 +30,9 @@ public class RatingDao {
             connection = connectionManager.getConnection();
             // if in the insert statement contains the rating_id, then the pass in parameter must have the rating id.
             // otherwise, we could ignore the rating_id in the insert statement, and add a Statement.RETURN_GENERATED_KEYS
-            // in the prepareStatement below.
+            // in the prepareStatement below; Meanwhile, also initialize a default value for the id.
             insertStmt = connection.prepareStatement(insertRating, Statement.RETURN_GENERATED_KEYS);
             // the insert data type shall also be consistent within the sql query
-//            insertStmt.setInt(1, rating.getRatingId());
             insertStmt.setString(1, rating.getMovie().getMovieId());
             insertStmt.setDouble(2, rating.getAverageRating());
             insertStmt.setInt(3, rating.getNumOfVotes());

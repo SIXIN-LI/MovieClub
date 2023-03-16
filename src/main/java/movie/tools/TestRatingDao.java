@@ -14,10 +14,8 @@ public class TestRatingDao {
         Movies movie = moviesDao.getMovieByMovieId("tt0000009");
         System.out.println("Movie get successfully!");
 
-        // Initilize a RatingDao instance
+        // initialize a RatingDao instance
         RatingDao ratingDao = RatingDao.getInstance();
-//        Integer originalNumOfVotes = 12;
-//        Double originalAvgRating = 5.0;
         Rating rating = new Rating(movie, 5.0, 12);
 
         // Test create
@@ -29,13 +27,5 @@ public class TestRatingDao {
         if (gotRating.equals(rating)) {
             System.out.println("Rating successfully got from the database: " + gotRating);
         }
-
-//        // Test updateRating
-//        Double newScore = 10.0;
-//        Rating updatedRating = ratingDao.updateRating(rating, newScore);
-//        if (updatedRating.getNumOfVotes() == originalNumOfVotes + 1 &&
-//                updatedRating.getAverageRating().compareTo(originalAvgRating + newScore)/updatedRating.getNumOfVotes() == 0) {
-//            System.out.println("Successfully updated the rating: " + updatedRating);
-//        }
     }
 }
