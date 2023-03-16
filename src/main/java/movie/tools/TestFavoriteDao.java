@@ -16,14 +16,15 @@ public class TestFavoriteDao {
     MoviesDao moviesDao = MoviesDao.getInstance();
     UsersDao usersDao = UsersDao.getInstance();
 
-    Movies movie = moviesDao.getMovieByMovieId("tt0000574");
-    Users user = usersDao.getUserByUserId(2);
+    Movies movie = moviesDao.getMovieByMovieId("tt0000009");
+    Users user = usersDao.getUserByUserId(1);
     Favorites favorite = new Favorites(movie, user);
+
     favorite = favoritesDao.create(favorite);
 
     Favorites favorite1 = favoritesDao.getFavoriteById(1);
     System.out.format("Reading Favorites: f:%s m:%s u:%s \n",
-        favorite1.getFavoriteId(), favorite1.getMovies().getMovieId(), favorite1.getUsers().getUserId());
+        favorite.getFavoriteId(), favorite.getMovies().getMovieId(), favorite.getUsers().getUserId());
 
     //getFavoritesByUserId
     List<Favorites> favoriteList = favoritesDao.getFavoritesByUserId(1);
@@ -39,5 +40,6 @@ public class TestFavoriteDao {
           f.getFavoriteId(), f.getMovies().getMovieId(), f.getUsers().getUserId());
     }
 
+    favoritesDao.delete(favorite1);
   }
 }
