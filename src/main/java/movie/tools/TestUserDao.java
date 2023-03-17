@@ -35,8 +35,8 @@ public class TestUserDao {
         }
 
         // test data match in database
-        Users gotUser3 = usersDao.getUserByUserId(1);
-        if (gotUser3.getFirstName().equals("Kennedy")) {
+        Users gotUser4 = usersDao.getUserByUserId(1);
+        if (gotUser4.getFirstName().equals("Kennedy")) {
             System.out.println("data match");
         }
 

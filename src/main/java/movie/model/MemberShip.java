@@ -4,21 +4,26 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 public class MemberShip {
-    protected String membershipId;
+    protected Integer membershipId;
     protected Users user;
     protected Timestamp timestamp;
 
-    public MemberShip(String membershipId, Users user, Timestamp timestamp) {
+    public MemberShip(Integer membershipId, Users user, Timestamp timestamp) {
         this.membershipId = membershipId;
         this.user = user;
         this.timestamp = timestamp;
     }
 
-    public String getMembershipId() {
+    public MemberShip(Users user, Timestamp timestamp) {
+        this.user = user;
+        this.timestamp = timestamp;
+    }
+
+    public Integer getMembershipId() {
         return membershipId;
     }
 
-    public void setMembershipId(String membershipId) {
+    public void setMembershipId(Integer membershipId) {
         this.membershipId = membershipId;
     }
 
@@ -60,4 +65,3 @@ public class MemberShip {
                 '}';
     }
 }
-

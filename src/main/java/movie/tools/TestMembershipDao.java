@@ -17,10 +17,10 @@ public class TestMembershipDao {
         usersDao.createUser(user);
         System.out.println("User created successfully!");
 
-        // Initilize a MembershipDao instance
+        // initialize a MembershipDao instance
         MembershipDao membershipDao = MembershipDao.getInstance();
         Timestamp timestamp = Timestamp.valueOf("2007-09-23 10:10:10.0");
-        MemberShip memberShip = new MemberShip("14519895", user, timestamp);
+        MemberShip memberShip = new MemberShip(user, timestamp);
 
         // Test create
         membershipDao.create(memberShip);
@@ -31,6 +31,11 @@ public class TestMembershipDao {
         if (gotMember.equals(memberShip)) {
             System.out.println("Membership successfully got from the database: " + gotMember);
         }
+
+        // Test getMemberFromUserName - when user doesn't have membership
+        MemberShip gotMember1 = membershipDao.getMemberFromUserId(0);
+        if (gotMember1 == null) {
+            System.out.println("When a user doesn't exist or doesn't have membership, expect to return " + gotMember1);
+        }
     }
 }
-
