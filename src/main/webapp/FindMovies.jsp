@@ -23,6 +23,9 @@
 		  </li>
 		</ul>
 		<ul class="navbar-nav ml-auto">
+			<li class="nav-item active">
+				<a class="nav-link" href="/userNotLogin"> <button type="button" class="btn btn-light">Membership</button></a>
+			</li>
 		  <li class="nav-item active">
 		    <a class="nav-link" href="#">Login</a>
 		  </li>
