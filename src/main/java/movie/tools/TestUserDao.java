@@ -27,7 +27,7 @@ public class TestUserDao {
         }
 
         user.setFirstName("Cece");
-        usersDao.updateUserByOneParam(user);
+        usersDao.updateUser(user);
 
         Users gotUser2 = usersDao.getUserByUserId(user.getUserId());
         if (gotUser2.getFirstName().equals("Cece")) {
