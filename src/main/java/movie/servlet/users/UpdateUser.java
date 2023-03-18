@@ -13,14 +13,14 @@ import javax.servlet.http.HttpServletResponse;
 import movie.dao.UsersDao;
 import movie.model.Users;
 
-@WebServlet("/getUserInfo")
-public class GetUserInfo extends HttpServlet {
+@WebServlet("/updateUser")
+public class UpdateUser extends HttpServlet {
 
-    public static Logger log = Logger.getLogger(GetUserInfo.class.toString());
+    public static Logger log = Logger.getLogger(UpdateUser.class.toString());
 
     protected UsersDao usersDao;
 
-    public GetUserInfo() {
+    public UpdateUser() {
         this.usersDao = UsersDao.getInstance();
     }
 
@@ -37,17 +37,11 @@ public class GetUserInfo extends HttpServlet {
         // Map for storing messages.
         Map<String, String> messages = new HashMap<String, String>();
         req.setAttribute("messages", messages);
-        req.setAttribute("action", "Update");
 
         Users user = (Users) req.getSession().getAttribute("user");
-        if (user == null) {
-            // forward to create user page
-            req.getRequestDispatcher("/registerUser").forward(req, resp);
-            return;
-        }
         req.setAttribute("user", user);
 
-        req.getRequestDispatcher("/UserInfo.jsp").forward(req, resp);
+        req.getRequestDispatcher("/UserPage/UpdateUser.jsp").forward(req, resp);
     }
 
     /**
@@ -63,11 +57,6 @@ public class GetUserInfo extends HttpServlet {
         req.setAttribute("messages", messages);
 
         Users user = (Users) req.getSession().getAttribute("user");
-        // Forward request to register user
-        if (user == null) {
-            req.getRequestDispatcher("/registerUser").forward(req, resp);
-            return;
-        }
         // Retrieve user id.
         int userId = user.getUserId();
 
@@ -77,17 +66,17 @@ public class GetUserInfo extends HttpServlet {
         String firstName = req.getParameter("firstname");
         String lastName = req.getParameter("lastname");
         Users.genderType gender = Users.genderType.valueOf(req.getParameter("gender"));
+        log.info(gender.toString());
 
         try {
             // Update user info
             user = new Users(userName, password, firstName, lastName, gender);
+            user.setUserId(userId);
             boolean updated = usersDao.updateUser(user);
 
             if (updated) {
                 messages.put("success", "Successfully updated " + userName);
 
-                // Update user attribute in session
-                user.setUserId(userId);
                 req.getSession().setAttribute("user", user);
             } else {
                 messages.put("failure", "Update failed " + userName);
@@ -99,7 +88,7 @@ public class GetUserInfo extends HttpServlet {
 
         req.setAttribute("user", user);
 
-        req.getRequestDispatcher("/UserInfo.jsp").forward(req, resp);
+        req.getRequestDispatcher("/UserPage/UpdateUser.jsp").forward(req, resp);
 
     }
 

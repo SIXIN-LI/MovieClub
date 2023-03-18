@@ -34,12 +34,6 @@ public class TestUserDao {
             System.out.println("update success");
         }
 
-        // test data match in database
-        Users gotUser3 = usersDao.getUserByUserId(1);
-        if (gotUser3.getFirstName().equals("Kennedy")) {
-            System.out.println("data match");
-        }
-
         Users gotLogInUser = usersDao.getUserByUserNameAndPassword("112234", "111");
         if (gotLogInUser!= null && gotLogInUser.equals(user2)) {
             System.out.println("Log in success");

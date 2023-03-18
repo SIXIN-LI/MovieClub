@@ -14,13 +14,13 @@ import movie.dao.UsersDao;
 import movie.model.Users;
 
 @WebServlet("/login")
-public class GetUserLogin extends HttpServlet {
+public class LoginUser extends HttpServlet {
 
-    public static Logger log = Logger.getLogger(GetUserInfo.class.toString());
+    public static Logger log = Logger.getLogger(LoginUser.class.toString());
 
     protected UsersDao usersDao;
 
-    public GetUserLogin() {
+    public LoginUser() {
         this.usersDao = UsersDao.getInstance();
     }
 
@@ -35,7 +35,7 @@ public class GetUserLogin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
         throws ServletException, IOException {
-        req.getRequestDispatcher("/login.jsp").forward(req, resp);
+        req.getRequestDispatcher("/UserPage/login.jsp").forward(req, resp);
     }
 
     /**
@@ -72,11 +72,11 @@ public class GetUserLogin extends HttpServlet {
 
             req.getSession().setAttribute("user", user);
 
-            // TODO: redirect to home page
-            resp.sendRedirect("test.jsp");
+            // redirect to home page
+            resp.sendRedirect("FindMovies.jsp");
         } else {
             messages.put("failure", "Your username or password is incorrect");
-            req.getRequestDispatcher("/login.jsp").forward(req, resp);
+            req.getRequestDispatcher("/UserPage/login.jsp").forward(req, resp);
         }
 
     }

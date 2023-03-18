@@ -15,7 +15,7 @@ import movie.model.Users;
 
 @WebServlet("/registerUser")
 public class RegisterUser extends HttpServlet {
-    public static Logger log = Logger.getLogger(GetUserInfo.class.toString());
+    public static Logger log = Logger.getLogger(RegisterUser.class.toString());
 
     protected UsersDao usersDao;
 
@@ -34,8 +34,7 @@ public class RegisterUser extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
         throws ServletException, IOException {
-        req.setAttribute("action", "Create");
-        req.getRequestDispatcher("/UserInfo.jsp").forward(req, resp);
+        req.getRequestDispatcher("/UserPage/RegisterUser.jsp").forward(req, resp);
     }
 
     @Override
@@ -43,7 +42,6 @@ public class RegisterUser extends HttpServlet {
         throws ServletException, IOException {
         Map<String, String> messages = new HashMap<String, String>();
         req.setAttribute("messages", messages);
-        req.setAttribute("action", "Create");
 
         Users user = null;
         // Get the updated user info
@@ -66,11 +64,11 @@ public class RegisterUser extends HttpServlet {
         if (user.getUserId() != 0) {
             messages.put("success", "Successfully created " + userName);
 
-            // redirect to login page
+            // redirect to login uri
             resp.sendRedirect("login");
         } else {
             messages.put("failure", "Sign up failed " + userName);
-            req.getRequestDispatcher("/UserInfo.jsp").forward(req, resp);
+            req.getRequestDispatcher("/UserPage/RegisterUser.jsp").forward(req, resp);
         }
 
     }
