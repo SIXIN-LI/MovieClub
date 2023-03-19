@@ -28,14 +28,26 @@ public class SurpriseMeDao {
     int high = 2029;
     int result = r.nextInt(high-low) + low;
     String generateYear = String.valueOf(result);
-    String selectFavorite =
-        "SELECT movie_id, title, is_adult, year, runtime_minutes,genre, action, COUNT(*) as cnt "
-            + "FROM (SELECT Movies.*, Intentions.action FROM "
-            + "(SELECT COUNT(*) as cnt, genre FROM "
-            + "(SELECT * from MovieViews WHERE user_id=?) tmp LEFT JOIN Movies ON tmp.movie_id=Movies.movie_id group by genre order by cnt desc limit 1) genre_t "
-            + "INNER JOIN Movies ON genre_t.genre=Movies.genre INNER JOIN Intentions ON Movies.movie_id = Intentions.movie_id WHERE Movies.year = ? AND Intentions.action='watched')tmp "
-            + "GROUP BY 1,2,3,4,5,6,7 ORDER BY cnt desc limit 1;";
-
+    String selectFavorite = "SELECT \n"
+    		+ "  Movies.*, Intentions.action, cnt\n"
+    		+ " FROM\n"
+    		+ " (\n"
+    		+ "  SELECT genre, cnt\n"
+    		+ "	FROM \n"
+    		+ "	(SELECT movie_id, COUNT(movie_id) AS cnt\n"
+    		+ "	FROM MovieViews\n"
+    		+ "	WHERE user_id = ?\n"
+    		+ "	GROUP BY movie_id\n"
+    		+ "    ORDER BY cnt Limit 1)mv\n"
+    		+ "	JOIN Movies on Movies.movie_id = mv.movie_id\n"
+    		+ ") genre_t \n"
+    		+ " INNER JOIN \n"
+    		+ " Movies \n"
+    		+ "  ON genre_t.genre=Movies.genre\n"
+    		+ "Join Intentions ON Movies.movie_id = Intentions.movie_id\n"
+    		+ "WHERE Movies.year = ? AND Intentions.action='watched'\n"
+    		+ "ORDER BY cnt desc\n"
+    		+ "LIMIT 1;";
     Connection connection = null;
     PreparedStatement selectStmt = null;
     ResultSet results = null;
