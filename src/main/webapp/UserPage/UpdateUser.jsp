@@ -18,6 +18,7 @@
         <form action="updateUser" method="post">
             <div class="jumbotron"><h1>Update User Info</h1></div>
             <jsp:include page="./UserInfo.jsp"/>
+<%--            <jsp:include page="./MembershipInfo.jsp"/>--%>
         </form>
     </div>
 </body>

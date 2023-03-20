@@ -31,6 +31,8 @@ public class CreateRating extends HttpServlet {
         ratingDao = RatingDao.getInstance();
     }
 
+    // By default, the method will be doGet, whenever we call the servlet unless we specify the action
+    // to be post in the jsp file.
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("hihihi100000-get");
         // Map for storing messages.
@@ -106,8 +108,7 @@ public class CreateRating extends HttpServlet {
                 e.printStackTrace();
                 throw new IOException(e);
             }
-            String successMessage = String.format("Displaying information for '%s'", movie.getTitle());
-            messages.put("success",successMessage);
+            messages.put("success","true");
         }
         req.setAttribute("movie", movie);
         req.setAttribute("rating", rating); // save the info in the request so that we could retrieve it in the jsp

@@ -13,26 +13,15 @@
          pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
-</head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <jsp:include page="/navbar.jsp"/>
+    <!-- Bootstrap -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <title>Create new rating</title>
 <body>
-<%--    <h1><c:out value="hello" escapeXml="false"/></h1>--%>
     <div class="container theme-showcase" role="main">
-        <%--    associate this jsp file with the corresponding servelet --%>
-<%--        <form action="createRating" method="post">--%>
-<%--            <div class="jumbotron"><h1>Create a new rating!</h1></div>--%>
-<%--            <p>--%>
-<%--            <h3><label for="score">Add a score</label></h3>--%>
-<%--            <input id="score" name="score" value="${fn:escapeXml(param.score)}">--%>
-<%--            </p>--%>
-<%--            <p>--%>
-<%--                <button><a href="findmovieinfo?movieid=<c:out value="${movie.getMovieId()}"/>"><c:out value="${movie.getTitle()}"/></a></button>--%>
-<%--             <a href="findmovieinfo?movieid=<c:out value="${movie.getMovieId()}"/>"><c:out value="${movie.getTitle()}"/></a>--%>
-<%--            </p>--%>
-<%--        </form>--%>
-
             <%--    associate this jsp file with the corresponding servelet --%>
-            <form action = "createRating" method = "post" onsubmit=onsubmit()>
+            <form action = "createRating" method = "post">
                 <div class="jumbotron"><h1>Create a new rating!</h1></div>
                 Score: <input type = "text" name = "score">
 <%--                    <script type="text/javascript">--%>
@@ -43,16 +32,26 @@
 <%--                            &lt;%&ndash;document.forms[0].submit();&ndash;%&gt;--%>
 <%--                        }--%>
 <%--                    </script>--%>
-                <script>
-                    function onsubmit() {
-                        alert("Form submitted successfully!");
-                    }
-                </script>
+<%--                <script>--%>
+<%--                    function onsubmit() {--%>
+<%--                        alert("Form submitted successfully!");--%>
+
+<%--                    }--%>
+<%--                </script>--%>
                 <p> </p>
-                <input type = "submit" value = "Submit" class="btn btn-light"/>
+                <input type = "submit" value = "Submit" class="btn btn-info"/>
+                <c:if test="${messages.success == true}">
+                    <script>
+                        window.addEventListener("load",function(){
+                            alert("You have successfully created a new rating!");
+                        })
+                    </script>
+                </c:if>
 
                 <%--   route back to the findmovieinfo page --%>
-                <a href="findmovieinfo?movieid=<c:out value="${movie.getMovieId()}"/>"><c:out value="Go back to previous page"/></a>
+                <button class="btn btn-light">
+                    <a href="findmovieinfo?movieid=<c:out value="${movie.getMovieId()}"/>"><c:out value="Back"/></a>
+                </button>
             </form>
     </div>
 </body>
