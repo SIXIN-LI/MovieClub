@@ -19,32 +19,38 @@
     <title>Nav Bar</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-end">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">MovieClub</a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="${pageContext.request.contextPath}">Home <span class="sr-only">(current)</span></a>
-            </li>
-        </ul>
-        <ul class="navbar-nav ml-auto">
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-end">
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+            <a class="nav-link" href="#">MovieClub</a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="${pageContext.request.contextPath}">Home <span class="sr-only">(current)</span></a>
+        </li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
 
-            <% Users user = (Users) request.getSession().getAttribute("user"); %>
-            <% if (user == null) { %>
-                <li class="nav-item active">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/login">Login</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/registerUser">SignUp</a>
-                </li>
-            <% } else { %>
-                <li class="nav-item active">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/updateUser">Profile</a>
-                </li>
-            <%} %>
-        </ul>
-    </nav>
+        <% Users user = (Users) request.getSession().getAttribute("user"); %>
+        <% if (user == null) { %>
+        <li class="nav-item active">
+            <a class="nav-link" href="${pageContext.request.contextPath}/login">Login</a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="${pageContext.request.contextPath}/registerUser">SignUp</a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="${pageContext.request.contextPath}/updateMembership">Membership</a>
+        </li>
+        <% } else { %>
+        <li class="nav-item active">
+            <a class="nav-link" href="${pageContext.request.contextPath}/updateUser">Profile</a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="${pageContext.request.contextPath}/updateMembership">Membership</a>
+        </li>
+        <%} %>
+    </ul>
+</nav>
 
 </body>
 </html>
