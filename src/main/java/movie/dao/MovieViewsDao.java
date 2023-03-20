@@ -18,7 +18,7 @@ public class MovieViewsDao {
 
 	private static MovieViewsDao instance = null;
 
-	protected MovieViewsDao() {
+	public MovieViewsDao() {
 		connectionManager = new ConnectionManager();
 	}
 
@@ -81,7 +81,7 @@ public class MovieViewsDao {
 		String selectMovieViews ="SELECT \n"
 				+ "	MovieViews.* \n"
 				+ "FROM MovieViews\n"
-				+ "WHERE MovieViews.user_id=?;";
+				+ "WHERE user_id=?;";
 		
 		Connection connection = null;
 		PreparedStatement selectStmt = null;
@@ -93,7 +93,7 @@ public class MovieViewsDao {
 			results = selectStmt.executeQuery();
 			UsersDao usersDao = UsersDao.getInstance();
 			MoviesDao moviesDao = MoviesDao.getInstance();
-			if (results.next()) {
+			while (results.next()) {
 				int resultviewId = results.getInt("view_id");
 				int  userId = results.getInt("user_id");
 				Users resultuser = usersDao.getUserByUserId(userId);
@@ -120,6 +120,50 @@ public class MovieViewsDao {
 		}
 		return movieViews;
 	}
+	public MovieViews getMovieViewsByViewId(int viewId) throws SQLException {
+		
+		String selectMovieViews ="SELECT \n"
+				+ "	MovieViews.* \n"
+				+ "FROM MovieViews\n"
+				+ "WHERE view_id=?;";
+		
+		Connection connection = null;
+		PreparedStatement selectStmt = null;
+		ResultSet results = null;
+		try {
+			connection = connectionManager.getConnection();
+			selectStmt = connection.prepareStatement(selectMovieViews);
+			selectStmt.setInt(1, viewId);
+			results = selectStmt.executeQuery();
+			UsersDao usersDao = UsersDao.getInstance();
+			MoviesDao moviesDao = MoviesDao.getInstance();
+			while (results.next()) {
+				int resultviewId = results.getInt("view_id");
+				int  userId = results.getInt("user_id");
+				Users resultuser = usersDao.getUserByUserId(userId);
+				String movieId = results.getString("movie_id");
+				Movies resultmovie = moviesDao.getMovieByMovieId(movieId);
+				Date viewTime = new Date(results.getTimestamp("view_time").getTime());
+				MovieViews newMovieView = new MovieViews(resultviewId,resultuser,resultmovie,viewTime);
+			
+				return newMovieView;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if (connection != null) {
+				connection.close();
+			}
+			if (selectStmt != null) {
+				selectStmt.close();
+			}
+			if (results != null) {
+				results.close();
+			}
+		}
+		return null;
+	}
 	
 	
 // delete movieView 
@@ -133,8 +177,6 @@ public class MovieViewsDao {
 			deleteStmt = connection.prepareStatement(deleteMovieView);
 			deleteStmt.setInt(1, movieView.getViewId());
 			deleteStmt.executeUpdate();
-
-			// Return null so the caller can no longer operate on the BlogComments instance.
 			return null;
 		} catch (SQLException e) {
 			e.printStackTrace();

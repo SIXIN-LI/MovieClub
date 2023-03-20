@@ -22,22 +22,23 @@
 		    <a class="nav-link" href="/MovieClub">Home <span class="sr-only">(current)</span></a>
 		  </li>
 		</ul>
-		<ul class="navbar-nav ml-auto">
-		  <li class="nav-item active">
-		    <a class="nav-link" href="#">Login</a>
-		  </li>
-		  <li class="nav-item active">
-		    <a class="nav-link" href="#">SignUp</a>
-		  </li>
-		</ul>
+	
 	</nav>
     <div class="container theme-showcase" role="main">
     
-	<form action="findmovies" method="post">
-	    <div class="jumbotron"><h1>Welcome to MovieClub!</h1></div>
+    
+	<form action="customizedSearchMovies" method="post">
+	    <div class="jumbotron"><h1>Now customize your search!</h1></div>
 		<p>
-			<h3><label for="moviename">MovieName</label></h3>
-			<input id="moviename" name="moviename" value="${fn:escapeXml(param.moviename)}">
+			<h4><label for="genre">Genre</label></h4>
+			<input id="genre" name="genre" value="${fn:escapeXml(param.genre)}">
+		
+			 
+			 
+			<h4><label for="rating">Rating</label></h4>
+			<input id="rating" name="rating" value="${fn:escapeXml(param.rating)}">
+		
+		
 		</p>
 		<p>
 			<input type="submit" class="btn btn-info" value="search">
@@ -45,14 +46,7 @@
 		</p>
 	</form>
 	
-	<!-- add customizedSearchMovies search  -->
-	
-	<h5><label for="or">Or</label></h5>
-	<form action="http://localhost:8080/MovieClub/customizedSearchMovies" method="get">
-    	<input type="submit" class="btn btn-info" value="customize search">
-	</form>
 
-	
 	
 	<div class="alert alert-info" role="alert">
 	<h2><span id="successMessage"><b>${messages.success}</b></span></h2>
