@@ -1,13 +1,10 @@
 package movie.dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 import movie.model.Users;
 
 /**
@@ -68,7 +65,7 @@ public class UsersDao {
      * Since all info except userId can be updated, then we will rewrite all of them everytime
      * Only userId cannot be updated
      */
-    public boolean updateUserByOneParam(Users user)
+    public boolean updateUser(Users user)
         throws SQLException {
         String updateUser = "UPDATE Users SET user_name=?, password=?, first_name=?, last_name=?, gender=? WHERE user_id=?;";
         try (Connection connection = connectionManager.getConnection();

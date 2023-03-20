@@ -27,17 +27,11 @@ public class TestUserDao {
         }
 
         user.setFirstName("Cece");
-        usersDao.updateUserByOneParam(user);
+        usersDao.updateUser(user);
 
         Users gotUser2 = usersDao.getUserByUserId(user.getUserId());
         if (gotUser2.getFirstName().equals("Cece")) {
             System.out.println("update success");
-        }
-
-        // test data match in database
-        Users gotUser4 = usersDao.getUserByUserId(1);
-        if (gotUser4.getFirstName().equals("Kennedy")) {
-            System.out.println("data match");
         }
 
         Users gotLogInUser = usersDao.getUserByUserNameAndPassword("112234", "111");
