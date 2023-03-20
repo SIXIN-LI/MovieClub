@@ -70,6 +70,9 @@ public class RatingDao {
             selectStmt = connection.prepareStatement(selectRating);
             selectStmt.setString(1, movieId);
             results = selectStmt.executeQuery();
+            if (results == null) {
+                return null;
+            }
             if (results.next()) {
                 Integer ratingId = results.getInt("rating_id");
                 Double avgRating = results.getDouble("average_rating");
@@ -95,5 +98,48 @@ public class RatingDao {
             }
         }
         return null;
+    }
+
+    public Rating updateRating(Rating rating, Double score) throws SQLException {
+        String updateRatingScore = "UPDATE Rating SET average_rating =? WHERE rating_id=?;";
+        String updateRatingVotes = "UPDATE Rating SET num_votes =? WHERE rating_id=?;";
+        Connection connection = null;
+        PreparedStatement updateStmt1 = null;
+        PreparedStatement updateStmt2 = null;
+        try {
+            connection = connectionManager.getConnection();
+
+            // Update total number of votes
+            Integer totalVotes = rating.getNumOfVotes() + 1;
+            updateStmt2 = connection.prepareStatement(updateRatingVotes);
+            updateStmt2.setDouble(1, totalVotes);
+            updateStmt2.setInt(2, rating.getRatingId());
+            updateStmt2.executeUpdate();
+
+            // Update average score
+            Double newAverageRating = (score + rating.getAverageRating() * rating.getNumOfVotes()) / totalVotes;
+            updateStmt1 = connection.prepareStatement(updateRatingScore);
+            updateStmt1.setDouble(1, newAverageRating);
+            updateStmt1.setInt(2, rating.getRatingId());
+            updateStmt1.executeUpdate();
+
+            // Update the rating object
+            rating.setAverageRating(newAverageRating);
+            rating.setNumOfVotes(totalVotes);
+            return rating;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            if (connection != null) {
+                connection.close();
+            }
+            if (updateStmt1 != null) {
+                updateStmt1.close();
+            }
+            if (updateStmt2 != null) {
+                updateStmt2.close();
+            }
+        }
     }
 }

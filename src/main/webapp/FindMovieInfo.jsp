@@ -44,6 +44,25 @@
 		  <li class="list-group-item">runtime_minutes: ${movie.getRuntimeMinutes()}</li>
 		  <li class="list-group-item">Is adult: ${movie.getIsAdult()?'Yes':'No'}</li>
 		</ul>
+		<p></p>
+<%--		<h2>${messages.withRatingOrNot}</h2>--%>
+		<c:choose>
+			<c:when test="${messages.withRatingOrNot == true}">
+				<h2>This movie has a rating: </h2>
+				<ul class="list-group list-group-flush">
+					<li class="list-group-item">Average Rating: ${rating.getAverageRating()}</li>
+					<li class="list-group-item">Total number of votes: ${rating.getNumOfVotes()}</li>
+				</ul>
+<%--				<button type="button" class="btn btn-info">Add a new rating </button>--%>
+				<input type="button" class="btn btn-info" value="Add a new rating" name="CreateRating"
+					   onclick="window.location='createRating'" />
+				<a href="createRating?movieid=<c:out value="${movie.getMovieId()}"/>"><c:out value="${movie.getTitle()}"/></a>
+			</c:when>
+			<c:when test="${messages.withoutRating == false}">
+				<h2>This movie doesn't have a rating: </h2>
+				<button type="button" class="btn btn-info">Create a new rating </button>
+			</c:when>
+		</c:choose>
 	</div>
 	</div>
 	
