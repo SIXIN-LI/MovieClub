@@ -53,10 +53,10 @@ public class FindMovieInfo extends HttpServlet {
 			try {
 				movie = moviesDao.getMovieByMovieId(movieId);
 
-				System.out.println("hihi movie id: " + movieId);
-				System.out.println("hihi movie idid: " + movieId);
+//				System.out.println("hihi movie id: " + movieId);
+//				System.out.println("hihi movie idid: " + movieId);
 				rating = ratingDao.getRatingFromMovieId(movieId);
-				System.out.println("hihi2: " + rating);
+//				System.out.println("hihi2: " + rating);
 				if (rating != null) {
 					messages.put("withRatingOrNot", "true");
 				} else {

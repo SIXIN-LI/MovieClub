@@ -54,13 +54,17 @@
 					<li class="list-group-item">Total number of votes: ${rating.getNumOfVotes()}</li>
 				</ul>
 <%--				<button type="button" class="btn btn-info">Add a new rating </button>--%>
-				<input type="button" class="btn btn-info" value="Add a new rating" name="CreateRating"
-					   onclick="window.location='createRating'" />
-				<a href="createRating?movieid=<c:out value="${movie.getMovieId()}"/>"><c:out value="${movie.getTitle()}"/></a>
+<%--				<input type="button" class="btn btn-info" value="Add a new rating" name="CreateRating"--%>
+<%--					   onclick="window.location='createRating'" />--%>
+
+				<%-- Use a button to route to a different page and also pass in the movieid parameter!--%>
+				<button class="btn btn-light"><a href="createRating?movieid=<c:out value="${movie.getMovieId()}"/>"><c:out value="Add a new rating"/></a></button>
+<%--				<a href="createRating?movieid=<c:out value="${movie.getMovieId()}"/>"><c:out value="${movie.getTitle()}"/></a>--%>
 			</c:when>
 			<c:when test="${messages.withoutRating == false}">
 				<h2>This movie doesn't have a rating: </h2>
-				<button type="button" class="btn btn-info">Create a new rating </button>
+<%--				<button type="button" class="btn btn-info">Create a new rating </button>--%>
+				<button class="btn btn-light"><a href="createRating?movieid=<c:out value="${movie.getMovieId()}"/>"><c:out value="Create a new rating"/></a></button>
 			</c:when>
 		</c:choose>
 	</div>
