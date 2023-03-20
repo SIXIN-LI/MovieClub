@@ -12,31 +12,35 @@ public class TestRatingDao {
         // Need to get movie firstly since movies is the foreign key of Rating
         MoviesDao moviesDao = MoviesDao.getInstance();
         Movies movie = moviesDao.getMovieByMovieId("tt0000009");
+        Movies movieWithoutRating = moviesDao.getMovieByMovieId("tt0000147");
         System.out.println("Movie get successfully!");
 
-        // Initilize a RatingDao instance
+        // initialize a RatingDao instance
         RatingDao ratingDao = RatingDao.getInstance();
-        Integer originalNumOfVotes = 12;
         Double originalAvgRating = 5.0;
-        Rating rating = new Rating(1, movie, 5.0, originalNumOfVotes);
+        Integer originalNumOfVotes = 12;
+        Rating rating = new Rating(movie, originalAvgRating, originalNumOfVotes);
 
         // Test create
         ratingDao.create(rating);
         System.out.println("Rating created successfully in the database!");
 
         // Test getRatingFromMovieId
-        Rating gotRating = ratingDao.getRatingFromMovieId(movie.getMovieId());
-        if (gotRating.equals(rating)) {
-            System.out.println("Rating successfully got from the database: " + gotRating);
+        Rating gotRating1 = ratingDao.getRatingFromMovieId(movieWithoutRating.getMovieId());
+        if (gotRating1 == null) {
+            System.out.println("The movie has no corresponding rating: " + gotRating1);
+        }
+        Rating gotRating2 = ratingDao.getRatingFromMovieId(movie.getMovieId());
+        if (gotRating2.equals(rating)) {
+            System.out.println("Rating successfully got from the database: " + gotRating2);
         }
 
         // Test updateRating
         Double newScore = 10.0;
         Rating updatedRating = ratingDao.updateRating(rating, newScore);
         if (updatedRating.getNumOfVotes() == originalNumOfVotes + 1 &&
-                updatedRating.getAverageRating().compareTo(originalAvgRating + newScore)/updatedRating.getNumOfVotes() == 0) {
+                updatedRating.getAverageRating().compareTo((originalAvgRating * originalNumOfVotes + newScore)/updatedRating.getNumOfVotes()) == 0) {
             System.out.println("Successfully updated the rating: " + updatedRating);
         }
-
     }
 }
