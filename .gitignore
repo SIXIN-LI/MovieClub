@@ -6,12 +6,14 @@
 
 ## compiled content
 target/
+out/
 
 ## configuration file
 MovieClub.iml
 
 ## ignore resourses folder
 **/beans.xml
+**/MANIFEST.MF
 
 ### macOS ###
 # General
