@@ -10,12 +10,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<jsp:include page="navbar.jsp"/>
 <!-- Bootstrap -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <title>Find Movies</title>
 </head>
 <body>
+	<jsp:include page="navbar.jsp"/>
 	<div class="container theme-showcase" role="main">
     <div class="jumbotron" style="margin-left:150px;margin-top:100px;margin-right:150px;color:black;text-align:left">
 		<h2>${messages.success}</h2>
