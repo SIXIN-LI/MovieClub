@@ -10,29 +10,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<jsp:include page="navbar.jsp"/>
 <!-- Bootstrap -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <title>Find Movies</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-end">
-		<ul class="navbar-nav mr-auto">
-		  <li class="nav-item active">
-		    <a class="nav-link" href="#">MovieClub</a>
-		  </li>
-		  <li class="nav-item active">
-		    <a class="nav-link" href="/MovieClub">Home <span class="sr-only">(current)</span></a>
-		  </li>
-		</ul>
-		<ul class="navbar-nav ml-auto">
-		  <li class="nav-item active">
-		    <a class="nav-link" href="#">Login</a>
-		  </li>
-		  <li class="nav-item active">
-		    <a class="nav-link" href="#">SignUp</a>
-		  </li>
-		</ul>
-	</nav>
 	<div class="container theme-showcase" role="main">
     <div class="jumbotron" style="margin-left:150px;margin-top:100px;margin-right:150px;color:black;text-align:left">
 		<h2>${messages.success}</h2>
