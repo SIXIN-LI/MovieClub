@@ -8,18 +8,24 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <jsp:include page="navbar.jsp"/>
 <!-- Bootstrap -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
-<title>Find fan favorites</title>
+<title>Find Surprise Me</title>
 </head>
 <body>
+<jsp:include page="./navbar.jsp"/>
 	<div class="container theme-showcase" role="main">
 	
 	<div class="jumbotron">
-	<h1>Top 10 Fan Favorite Movies</h1>
+	<h1>Surprise Me Movie</h1>
 	</div>
-      <table class="table table-striped">
+        <br/><br/>
+<%--    <c:choose>--%>
+<%--        <c:when test="${messages.userNotLoggedIn == true}">--%>
+<%--            <h2> No user logged in yet, please log in or create a new account </h2>--%>
+<%--        </c:when>--%>
+<%--        <c:when test="${messages.userNotLoggedIn == false}">--%>
+        <table class="table table-striped">
             <thead><tr>
                 <th>title</th>
                 <th>year</th>
@@ -27,17 +33,17 @@
                 <th>runtime_minutes</th>
                 <th>is_adult</th>
             </tr></thead>
-            <c:forEach items="${fanFavorites}" var="movie" >
-                <tbody><tr>
-                    <td><a href="findmovieinfo?movieid=<c:out value="${movie.getMovieId()}"/>"><c:out value="${movie.getTitle()}"/></a></td>
-                    <td><c:out value="${movie.getYear()}" /></td>
-                    <td><c:out value="${movie.getGenre()}" /></td>
-                    <td><c:out value="${movie.getRuntimeMinutes()}"/></td>
-                    <td><c:out value="${movie.getIsAdult()?'Yes':'No'}"/></td>
-                </tr></tbody>
-            </c:forEach>
-       </table>  
-	<br/><br/>
+            <tbody><tr>
+                <td><a href="findmovieinfo?movieid=<c:out value="${surpriseMe.getMovieId()}"/>"><c:out value="${surpriseMe.getTitle()}"/></a></td>
+                <td><c:out value="${surpriseMe.getYear()}" /></td>
+                <td><c:out value="${surpriseMe.getGenre()}" /></td>
+                <td><c:out value="${surpriseMe.getRuntimeMinutes()}"/></td>
+                <td><c:out value="${surpriseMe.getIsAdult()?'Yes':'No'}"/></td>
+            </tr></tbody>
+        </table>
+<%--        </c:when>--%>
+<%--    </c:choose>--%>
+	
 	</div>
 	
 	<!-- Bootstrap -->

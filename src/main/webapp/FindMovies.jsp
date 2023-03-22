@@ -17,11 +17,19 @@
     <div class="container theme-showcase" role="main">
 	<form action="findmovies" method="post">
 	    <div class="jumbotron"><h1>Welcome to MovieClub!</h1></div>
+        <br></br>
         <div id="fanFavorites">
             <h3>
                 <a href="http://localhost:8080/MovieClub_war_exploded/fanfavorites">Explore Top 10 Fan Favorite Movies</a>
             </h3>
         </div>
+        <br></br>
+        <div id="surpriseMe">
+            <h3>
+                <a href="http://localhost:8080/MovieClub_war_exploded/surpriseme">Surprise Me</a>
+            </h3>
+        </div>
+        <br></br>
 		<p>
 			<h3><label for="moviename">MovieName</label></h3>
 			<input id="moviename" name="moviename" value="${fn:escapeXml(param.moviename)}">
