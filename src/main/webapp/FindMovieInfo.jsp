@@ -25,10 +25,10 @@
 			<li class="list-group-item">runtime_minutes: ${movie.getRuntimeMinutes()}</li>
 			<li class="list-group-item">Is adult: ${movie.getIsAdult()?'Yes':'No'}</li>
 			<li class="list-group-item">Crews:
-				<% for (Crew crew: (List<Crew>) request.getAttribute("crews")
-				) {
-					out.print(crew.getName() + "; ");
-				} %> </li>"
+				 <c:forEach items="${crews}" var="crew">
+				 	<a href="findcrew?crewid=<c:out value="${crew.getCrewId()}"/>"><span><c:out value="${crew.getName()}"/>;</span></a>
+				 </c:forEach>
+			</li>
 		</ul>
 		<p></p>
 		<c:choose>
