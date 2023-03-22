@@ -58,12 +58,12 @@ public class MoviesToCrews {
     // equals method
 
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof MoviesToCrews that)) return false;
-        return getMovieToCrewId() == that.getMovieToCrewId() && getMovie().equals(that.getMovie()) && getCrew().equals(that.getCrew()) && getJobCategory() == that.getJobCategory();
-    }
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (!(o instanceof MoviesToCrews that)) return false;
+//        return getMovieToCrewId() == that.getMovieToCrewId() && getMovie().equals(that.getMovie()) && getCrew().equals(that.getCrew()) && getJobCategory() == that.getJobCategory();
+//    }
 
     @Override
     public int hashCode() {

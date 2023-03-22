@@ -70,12 +70,12 @@ public class Intentions {
         this.action = action;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Intentions that)) return false;
-        return getIntentionId() == that.getIntentionId() && getUser().equals(that.getUser()) && getMovie().equals(that.getMovie()) && getTimestamp().equals(that.getTimestamp()) && getAction().equals(that.getAction());
-    }
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (!(o instanceof Intentions that)) return false;
+//        return getIntentionId() == that.getIntentionId() && getUser().equals(that.getUser()) && getMovie().equals(that.getMovie()) && getTimestamp().equals(that.getTimestamp()) && getAction().equals(that.getAction());
+//    }
 
     @Override
     public int hashCode() {
