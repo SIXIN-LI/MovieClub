@@ -45,6 +45,9 @@
         <li class="nav-item active">
             <a class="nav-link" href="${pageContext.request.contextPath}/updateUser">Profile</a>
         </li>
+         <li class="nav-item active">
+            <a class="nav-link" href="${pageContext.request.contextPath}/movieViewsInfo">View History</a>
+        </li>
         <li class="nav-item active">
             <a class="nav-link" href="${pageContext.request.contextPath}/updateMembership">Membership</a>
         </li>
