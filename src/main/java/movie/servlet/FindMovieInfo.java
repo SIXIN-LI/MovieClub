@@ -41,7 +41,7 @@ public class FindMovieInfo extends HttpServlet {
 		req.setAttribute("messages", messages);
 		Movies movie;
 		Rating rating;
-		List<Crew> crews = new ArrayList<>();
+		List<Crew> crews;
 
 		// Retrieve and validate name.
 		// movieId is retrieved from the URL query string.
@@ -68,19 +68,7 @@ public class FindMovieInfo extends HttpServlet {
 			String successMessage = String.format("Displaying information for '%s'", movie.getTitle());
 			messages.put("success",successMessage);
 		}
-
-		Set<String> map = new HashSet();
-		for (Crew c : crews) {
-			map.add(c.getName());
-		}
-		String crewIds = "";
-		for (String c : map) {
-			crewIds += c + ", ";
-		}
-		if (!crewIds.isEmpty()) {
-			crewIds = crewIds.substring(0, crewIds.length() - 2);
-		}
-		req.setAttribute("crews", crewIds);
+		req.setAttribute("crews", crews);
 		req.setAttribute("movie", movie);
 		req.setAttribute("rating", rating); // save the info in the request so that we could retrieve it in the jsp
 		req.getRequestDispatcher("/FindMovieInfo.jsp").forward(req, resp);
