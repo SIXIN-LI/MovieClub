@@ -20,11 +20,6 @@
 	<h1>Surprise Me Movie</h1>
 	</div>
         <br/><br/>
-<%--    <c:choose>--%>
-<%--        <c:when test="${messages.userNotLoggedIn == true}">--%>
-<%--            <h2> No user logged in yet, please log in or create a new account </h2>--%>
-<%--        </c:when>--%>
-<%--        <c:when test="${messages.userNotLoggedIn == false}">--%>
         <table class="table table-striped">
             <thead><tr>
                 <th>title</th>
@@ -41,9 +36,6 @@
                 <td><c:out value="${surpriseMe.getIsAdult()?'Yes':'No'}"/></td>
             </tr></tbody>
         </table>
-<%--        </c:when>--%>
-<%--    </c:choose>--%>
-	
 	</div>
 	
 	<!-- Bootstrap -->
