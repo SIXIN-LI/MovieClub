@@ -71,7 +71,7 @@ public class FindMovieInfo extends HttpServlet {
 
 		Set<String> map = new HashSet();
 		for (Crew c : crews) {
-			map.add(c.getCrewId());
+			map.add(c.getName());
 		}
 		String crewIds = "";
 		for (String c : map) {
