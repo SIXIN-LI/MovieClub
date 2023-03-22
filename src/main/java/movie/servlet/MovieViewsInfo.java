@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import movie.dao.CustomizedSearchDao;
 import movie.dao.MovieViewsDao;
@@ -42,43 +43,29 @@ public class MovieViewsInfo extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		// Map for storing messages.
-        Map<String, String> messages = new HashMap<String, String>();
-        req.setAttribute("messages", messages);
-        List<MovieViews> movieViews = new ArrayList<MovieViews>();
-       
-     
-        String userIdStr = req.getParameter("userId");
-        Users user;
-        if (userIdStr == null || userIdStr.isEmpty()) {
-        	user = null;
-        }else {
-        	int userId = Integer.parseInt(userIdStr);
-        	try {
-                user = usersDao.getUserByUserId(userId);
-            } catch (SQLException e) {
-                e.printStackTrace();
-                throw new IOException(e);
-            }
-        }
-        
-   
-        if (userIdStr == null || userIdStr.trim().isEmpty()) {
-            messages.put("success", "Please enter a valid userId.");
-        } else {
-        	// Retrieve MovieViews, and store as a message.
-        	try {
-        		movieViews = movieViewsDao.getMovieViewsByUserId(user);
-            } catch (SQLException e) {
-    			e.printStackTrace();
-    			throw new IOException(e);
-            }
-        	String successMessage = String.format("Displaying results for '%s'", userIdStr);
-        	messages.put("success", successMessage);
-        
-        }
-        req.setAttribute("movieViews", movieViews);
+		 Map<String, String> messages = new HashMap<String, String>();
+	        req.setAttribute("messages", messages);
+	        List<MovieViews> movieViews = new ArrayList<MovieViews>();
+	        
+	        
+	        Users user = (Users) req.getSession().getAttribute("user");
+	        if (user == null) {
+	            messages.put("success", "User is null.");
+	        } else {
 
-        req.getRequestDispatcher("/MovieViewsInfo.jsp").forward(req, resp);
+	            try {
+	                movieViews = movieViewsDao.getMovieViewsByUserId(user);
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	                throw new IOException(e);
+	            }
+
+	            String successMessage = String.format("Displaying results for user '%s'", user.getUserName());
+	            messages.put("success", successMessage);
+	        }
+	        req.setAttribute("user", user);
+	        req.setAttribute("movieViews", movieViews);
+	        req.getRequestDispatcher("/MovieViewsInfo.jsp").forward(req, resp);
 
 	}
 	
@@ -91,54 +78,42 @@ public class MovieViewsInfo extends HttpServlet {
 		 Map<String, String> messages = new HashMap<String, String>();
 	        req.setAttribute("messages", messages);
 	        List<MovieViews> movieViews = new ArrayList<MovieViews>();
-	       
-	     
-	        String userIdStr = req.getParameter("userId");
-	        Users user;
-	        if (userIdStr == null || userIdStr.isEmpty()) {
-	        	user = null;
-	        }else {
-	        	int userId = Integer.parseInt(userIdStr);
-	        	try {
-	                user = usersDao.getUserByUserId(userId);
+	        
+	        
+	        Users user = (Users) req.getSession().getAttribute("user");
+	        if (user == null) {
+	            messages.put("success", "User is null.");
+	        } else {
+
+	            try {
+	                movieViews = movieViewsDao.getMovieViewsByUserId(user);
 	            } catch (SQLException e) {
 	                e.printStackTrace();
 	                throw new IOException(e);
 	            }
-	        }
-	        
-	   
-	        if (userIdStr == null || userIdStr.trim().isEmpty()) {
-	            messages.put("success", "Please enter a valid userId.");
-	        } else {
-	        	// Retrieve MovieViews, and store as a message.
-	        	try {
-	        		movieViews = movieViewsDao.getMovieViewsByUserId(user);
-	            } catch (SQLException e) {
-	    			e.printStackTrace();
-	    			throw new IOException(e);
-	            }
-	        	String successMessage = String.format("Displaying results for '%s'", userIdStr);
-	        	messages.put("success", successMessage);
-	        
-	        }
-	        req.setAttribute("movieViews", movieViews);
 
-	        req.getRequestDispatcher("/MovieViewsInfo.jsp").forward(req, resp);
-	        
-	     // Delete all MovieViews records for the specified user ID
-	        try {
-	            movieViewsDao.delete(user);
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	            throw new IOException(e);
+	            String successMessage = String.format("Displaying results for user '%s'", user.getUserName());
+	            messages.put("success", successMessage);
 	        }
-	        // Set success message to indicate deletion completed
-	        messages.put("success", String.format("Deleted all MovieViews for user ID %d", user.getUserId()));
+	        req.setAttribute("user", user);
 	        req.setAttribute("movieViews", movieViews);
 	        req.getRequestDispatcher("/MovieViewsInfo.jsp").forward(req, resp);
+
+     
+	     // Delete all MovieViews records for the specified user ID
+	        if (user != null) {
+		        try {
+		            movieViewsDao.delete(user);
+		        } catch (SQLException e) {
+		            e.printStackTrace();
+		            throw new IOException(e);
+		        }
+		        // Set success message to indicate deletion completed
+		        messages.put("success", String.format("Deleted all MovieViews for user ID %d", user.getUserId()));
+		        req.setAttribute("movieViews", movieViews);
+		        req.getRequestDispatcher("/MovieViewsInfo.jsp").forward(req, resp);
 
     }
 
-
+	}
 }

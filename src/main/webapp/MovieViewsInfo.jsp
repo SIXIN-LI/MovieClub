@@ -26,8 +26,8 @@
 	</nav>
     <div class="container theme-showcase" role="main">
     
-    
-	<form action="movieViewsInfo" method="post">
+<%--     
+ 	<form action="movieViewsInfo" method="post">
 	    <div class="jumbotron"><h1>Your view history</h1></div>
 		<p>
 			<h4><label for="userId">UserId</label></h4>
@@ -38,14 +38,14 @@
 			<input type="submit" class="btn btn-info" value="search">
 			
 		</p>
-	</form>
+	</form>  --%> 
 	
 
-	
+	<div class="jumbotron"><h1>Your view history</h1></div>
 	<div class="alert alert-info" role="alert">
 	<h2><span id="successMessage"><b>${messages.success}</b></span></h2>
 	</div>
-	<h1>Your history</h1>
+	 <h2>View History for User ID: <c:out value="${fn:escapeXml(param.userId)}" /></h2>
         <table class="table table-striped">
             <thead><tr>
                 <th>userName</th>
