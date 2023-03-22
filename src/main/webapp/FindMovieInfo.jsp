@@ -22,6 +22,7 @@
 			<li class="list-group-item">Genre: ${movie.getGenre()}</li>
 			<li class="list-group-item">runtime_minutes: ${movie.getRuntimeMinutes()}</li>
 			<li class="list-group-item">Is adult: ${movie.getIsAdult()?'Yes':'No'}</li>
+			<li class="list-group-item">Crews: ${crews}</li>
 		</ul>
 		<p></p>
 		<c:choose>
