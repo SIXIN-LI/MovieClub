@@ -6,6 +6,8 @@ import movie.model.Movies;
 import movie.model.MoviesToCrews;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * As a MovieToCrew table operator, I will need to get/add.
@@ -60,26 +62,24 @@ public class MoviesToCrewsDao {
         }
     }
 
-    public MoviesToCrews getMoviesToCrewsById(int movieToCrewId) throws SQLException {
-        String select = "SELECT movie_id, crew_id, job_category FROM MovieToCrews WHERE movie_to_crew_id=?;";
+    public List<Crew> getCrewsByMovieId(String movieId) throws SQLException {
+        String select = "SELECT crew_id FROM MovieToCrews WHERE movie_id=?;";
+        List<Crew> res = new ArrayList<>();
         try (Connection connection = connectionManager.getConnection();
              PreparedStatement selectStmt = connection.prepareStatement(select)) {
-            selectStmt.setInt(1, movieToCrewId);
+            selectStmt.setString(1, movieId);
             ResultSet results = selectStmt.executeQuery();
-            if (results.next()) {
-                String movieId = results.getString("movie_id");
+            while (results.next()) {
                 String crewId = results.getString("crew_id");
-                String jobCategory = results.getString("job_category");
-
                 Crew crew = CrewDao.getInstance().getCrewByCrewId(crewId);
-                Movies movie = MoviesDao.getInstance().getMovieByMovieId(movieId);
-                MoviesToCrews moviesToCrews = new MoviesToCrews(movieToCrewId, movie, crew, MoviesToCrews.JobCategory.valueOf(jobCategory.toUpperCase()));
-                return moviesToCrews;
+                res.add(crew);
             }
+            return res;
+
+
         } catch (SQLException e) {
             e.printStackTrace();
             throw e;
         }
-        return null;
     }
 }

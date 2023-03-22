@@ -2,15 +2,16 @@ package movie.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import movie.dao.MoviesDao;
+import movie.dao.MoviesToCrewsDao;
 import movie.dao.RatingDao;
+import movie.model.Crew;
 import movie.model.Movies;
 import movie.model.Rating;
 
@@ -22,11 +23,13 @@ public class FindMovieInfo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected MoviesDao moviesDao;
 	protected RatingDao ratingDao;
+	protected MoviesToCrewsDao moviesToCrewsDao;
 
 	@Override
 	public void init() throws ServletException {
 		moviesDao = MoviesDao.getInstance();
 		ratingDao = RatingDao.getInstance();
+		moviesToCrewsDao = MoviesToCrewsDao.getInstance();
 	}
 
 	/**
@@ -38,6 +41,7 @@ public class FindMovieInfo extends HttpServlet {
 		req.setAttribute("messages", messages);
 		Movies movie;
 		Rating rating;
+		List<Crew> crews;
 
 		// Retrieve and validate name.
 		// movieId is retrieved from the URL query string.
@@ -56,6 +60,7 @@ public class FindMovieInfo extends HttpServlet {
 				} else {
 					messages.put("withoutRating", "false");
 				}
+				crews = moviesToCrewsDao.getCrewsByMovieId(movieId);
 			} catch (SQLException e) {
 				e.printStackTrace();
 				throw new IOException(e);
@@ -63,7 +68,7 @@ public class FindMovieInfo extends HttpServlet {
 			String successMessage = String.format("Displaying information for '%s'", movie.getTitle());
 			messages.put("success",successMessage);
 		}
-
+		req.setAttribute("crews", crews);
 		req.setAttribute("movie", movie);
 		req.setAttribute("rating", rating); // save the info in the request so that we could retrieve it in the jsp
 		req.getRequestDispatcher("/FindMovieInfo.jsp").forward(req, resp);

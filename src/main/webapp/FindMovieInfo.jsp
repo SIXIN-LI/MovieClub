@@ -1,3 +1,5 @@
+<%@ page import="movie.model.Crew" %>
+<%@ page import="java.util.List" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
@@ -22,6 +24,11 @@
 			<li class="list-group-item">Genre: ${movie.getGenre()}</li>
 			<li class="list-group-item">runtime_minutes: ${movie.getRuntimeMinutes()}</li>
 			<li class="list-group-item">Is adult: ${movie.getIsAdult()?'Yes':'No'}</li>
+			<li class="list-group-item">Crews:
+				<% for (Crew crew: (List<Crew>) request.getAttribute("crews")
+				) {
+					out.print(crew.getName() + "; ");
+				} %> </li>"
 		</ul>
 		<p></p>
 		<c:choose>
