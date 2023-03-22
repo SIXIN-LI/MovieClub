@@ -25,8 +25,8 @@ public class TestMovieViewsDao {
 		Movies foundMovie1 = moviesDao.getMovieByMovieId("tt0087277");
 		System.out.println("found movie with movie_id 'tt0087277':" + foundMovie1);
 		
-		Users fetchUser = usersDao.getUserByUserId(7124);
-		System.out.println("find user by user_id '7124':" + fetchUser);
+		Users fetchUser = usersDao.getUserByUserId(9033);
+		System.out.println("find user by user_id '9033':" + fetchUser);
 		
 		
 		List<MovieViews> fetchMovieViews = movieViewsDao.getMovieViewsByMovieId(foundMovie1);
@@ -37,17 +37,21 @@ public class TestMovieViewsDao {
 		
 		List<MovieViews> fetchMovieViewsByUser = movieViewsDao.getMovieViewsByUserId(fetchUser);
 		for(MovieViews ful : fetchMovieViewsByUser) {
-			System.out.format("Looping MovieViews user_id:%d time:%s movieId:%s \n",
-				ful.getViewId(), ful.getViewTime(), ful.getMovie().getMovieId());
+			System.out.format("Looping MovieViews by user_id:viewId:%d time:%s movieName:%s \n",
+				ful.getViewId(), ful.getViewTime(), ful.getMovie().getTitle());
 		}
 		
-//		delete movieView
-		for (MovieViews movieView : fetchMovieViews) {
-		    movieViewsDao.delete(movieView);
+		MovieViews fetchMovieViewsByViewId = movieViewsDao.getMovieViewsByViewId(4);
+		System.out.println("find user by view_id '4':" + fetchMovieViewsByViewId.getViewId());
+		
+
+		for (MovieViews flv : fetchMovieViewsByUser ) {
+		    movieViewsDao.delete(fetchUser);
 		}
 	
 		assert Objects.isNull(fetchMovieViews);
-		
+		System.out.println("successfully deleted" );
+			
 		
 	}
 }

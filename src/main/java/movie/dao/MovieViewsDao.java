@@ -76,6 +76,8 @@ public class MovieViewsDao {
 		return movieViews;
 	}
 	
+	
+	
 	public List<MovieViews> getMovieViewsByUserId(Users user) throws SQLException {
 		List<MovieViews> movieViews = new ArrayList<MovieViews>();
 		String selectMovieViews ="SELECT \n"
@@ -120,6 +122,8 @@ public class MovieViewsDao {
 		}
 		return movieViews;
 	}
+	
+	
 	public MovieViews getMovieViewsByViewId(int viewId) throws SQLException {
 		
 		String selectMovieViews ="SELECT \n"
@@ -168,14 +172,14 @@ public class MovieViewsDao {
 	
 // delete movieView 
 
-	public MovieViews delete(MovieViews movieView) throws SQLException {
-		String deleteMovieView = "DELETE FROM MovieViews WHERE view_id=?;";
+	public MovieViews delete(Users user) throws SQLException {
+		String deleteMovieView = "DELETE FROM MovieViews WHERE user_id=?;";
 		Connection connection = null;
 		PreparedStatement deleteStmt = null;
 		try {
 			connection = connectionManager.getConnection();
 			deleteStmt = connection.prepareStatement(deleteMovieView);
-			deleteStmt.setInt(1, movieView.getViewId());
+			deleteStmt.setInt(1, user.getUserId());
 			deleteStmt.executeUpdate();
 			return null;
 		} catch (SQLException e) {
