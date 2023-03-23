@@ -21,13 +21,13 @@
         <br></br>
         <div id="fanFavorites">
             <h3>
-                <a href="http://localhost:8080/MovieClub_war_exploded/fanfavorites">Explore Top 10 Fan Favorite Movies</a>
+                <a href="http://localhost:8080/MovieClub/fanfavorites">Explore Top 10 Fan Favorite Movies</a>
             </h3>
         </div>
         <br></br>
         <div id="surpriseMe">
             <h3>
-                <a href="http://localhost:8080/MovieClub_war_exploded/surpriseme">Surprise Me</a>
+                <a href="http://localhost:8080/MovieClub/surpriseme">Surprise Me</a>
             </h3>
         </div>
         <br></br>
