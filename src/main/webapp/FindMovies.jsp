@@ -15,41 +15,35 @@
 </head>
 <body>
     <div class="container theme-showcase" role="main">
-    
 	<form action="findmovies" method="post">
 	    <div class="jumbotron"><h1>Welcome to MovieClub!</h1></div>
-        <br></br>
-        <div id="fanFavorites">
-            <h3>
-                <a href="http://localhost:8080/MovieClub/fanfavorites">Explore Top 10 Fan Favorite Movies</a>
+        <div style="overflow:auto;">
+            <style>
+              h3 a {
+                color: white;
+              }
+            </style>
+            <h3 type="submit" class="btn btn-info" style="float:left; margin-right:250px">
+                <a href="http://localhost:8080/MovieClub/fanfavorites">Top 10 Fan Favorite Movies</a>
             </h3>
-        </div>
-        <br></br>
-        <div id="surpriseMe">
-            <h3>
+            <h3 type="submit" class="btn btn-info" style="float:none; margin:0 auto;">
                 <a href="http://localhost:8080/MovieClub/surpriseme">Surprise Me</a>
             </h3>
+            <h3 type="submit" class="btn btn-info" style="float:right;">
+                <a href="http://localhost:8080/MovieClub/customizedSearchMovies">Customized Search</a>
+            </h3>
         </div>
-        <br></br>
+        <hr>
+        <br>
 		<p>
 			<h3><label for="moviename">MovieName</label></h3>
 			<input id="moviename" name="moviename" value="${fn:escapeXml(param.moviename)}">
 		</p>
 		<p>
 			<input type="submit" class="btn btn-info" value="search">
-			
 		</p>
-	</form>
-	
-	<!-- add customizedSearchMovies search  -->
-	
-	<h5><label for="or">Or</label></h5>
-	<form action="http://localhost:8080/MovieClub/customizedSearchMovies" method="get">
-    	<input type="submit" class="btn btn-info" value="customize search">
-	</form>
 
-	
-	
+	</form>
 	<div class="alert alert-info" role="alert">
 	<h2><span id="successMessage"><b>${messages.success}</b></span></h2>
 	</div>

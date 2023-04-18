@@ -47,14 +47,17 @@ public class SurpriseMe extends HttpServlet {
 				} else {
 					try {
 						surpriseMe = surpriseMeDao.getSurpriseMeByUserId(user.getUserId());
-						if(surpriseMe == null) surpriseMe = FanFavoritesDao.getInstance().getTopFanFavorites().get(2);
-						else surpriseMe = surpriseMeDao.getSurpriseMeByUserId(user.getUserId());
+						if(surpriseMe == null) {
+							surpriseMe = FanFavoritesDao.getInstance().getTopFanFavorites().get(2);
+						} else {
+							surpriseMe = surpriseMeDao.getSurpriseMeByUserId(user.getUserId());
+						}
 					} catch (SQLException e) {
 						e.printStackTrace();
 					}
 				}
-
-//        req.setAttribute("user", user);
+				String surpriseMessage = String.format("Our Recommended Movie:  '%s'!", surpriseMe.getTitle());
+				messages.put("surprise",surpriseMessage);
         req.setAttribute("surpriseMe", surpriseMe);
         req.getRequestDispatcher("/SurpriseMe.jsp").forward(req, resp);
 	}
