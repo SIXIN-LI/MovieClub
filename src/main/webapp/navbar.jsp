@@ -33,7 +33,7 @@
         <% Users user = (Users) request.getSession().getAttribute("user"); %>
         <% if (user == null) { %>
         <li class="nav-item active">
-            <a class="nav-link" href="${pageContext.request.contextPath}/login">Login</a>
+            <a class="nav-link" href="${pageContext.request.contextPath}/login">Log In</a>
         </li>
         <li class="nav-item active">
             <a class="nav-link" href="${pageContext.request.contextPath}/registerUser">SignUp</a>
@@ -50,6 +50,9 @@
         </li>
         <li class="nav-item active">
             <a class="nav-link" href="${pageContext.request.contextPath}/updateMembership">Membership</a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="${pageContext.request.contextPath}/logout">Log out</a>
         </li>
         <%} %>
     </ul>
