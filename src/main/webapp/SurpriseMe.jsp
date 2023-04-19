@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+         pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -14,35 +14,47 @@
 </head>
 <body>
 <jsp:include page="./navbar.jsp"/>
-	<div class="container theme-showcase" role="main">
-	
-	<div class="jumbotron">
-	<h1>Surprise Me Movie</h1>
-	</div>
-        <br/><br/>
-        <table class="table table-striped">
-            <thead><tr>
-                <th>title</th>
-                <th>year</th>
-                <th>genre</th>
-                <th>runtime_minutes</th>
-                <th>is_adult</th>
-            </tr></thead>
-            <tbody><tr>
-                <td><a href="findmovieinfo?movieid=<c:out value="${surpriseMe.getMovieId()}"/>"><c:out value="${surpriseMe.getTitle()}"/></a></td>
-                <td><c:out value="${surpriseMe.getYear()}" /></td>
-                <td><c:out value="${surpriseMe.getGenre()}" /></td>
-                <td><c:out value="${surpriseMe.getRuntimeMinutes()}"/></td>
-                <td><c:out value="${surpriseMe.getIsAdult()?'Yes':'No'}"/></td>
-            </tr></tbody>
-        </table>
-	</div>
-	
-	<!-- Bootstrap -->
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
-    
+<div class="container theme-showcase" role="main">
+    <div class="jumbotron">
+        <h1>Surprise Me Movie</h1>
+    </div>
+
+    <%--        <table class="table table-striped">--%>
+    <%--            <thead><tr>--%>
+    <%--                <th>title</th>--%>
+    <%--                <th>year</th>--%>
+    <%--                <th>genre</th>--%>
+    <%--                <th>runtime_minutes</th>--%>
+    <%--                <th>is_adult</th>--%>
+    <%--            </tr></thead>--%>
+    <%--            <tbody><tr>--%>
+    <%--                <td><a href="findmovieinfo?movieid=<c:out value="${surpriseMe.getMovieId()}"/>"><c:out value="${surpriseMe.getTitle()}"/></a></td>--%>
+    <%--                <td><c:out value="${surpriseMe.getYear()}" /></td>--%>
+    <%--                <td><c:out value="${surpriseMe.getGenre()}" /></td>--%>
+    <%--                <td><c:out value="${surpriseMe.getRuntimeMinutes()}"/></td>--%>
+    <%--                <td><c:out value="${surpriseMe.getIsAdult()?'Yes':'No'}"/></td>--%>
+    <%--            </tr></tbody>--%>
+    <%--        </table>--%>
+    <hr>
+    <br>
+    <div class="jumbotron" style="color:black;text-align:left">
+        <h3 style="color:cornflowerblue;">${messages.surprise}</h3>
+        <br></br>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Title:  ${surpriseMe.getTitle()}</li>
+            <li class="list-group-item">Year:  ${surpriseMe.getYear()}</li>
+            <li class="list-group-item">Genre:  ${surpriseMe.getGenre()}</li>
+            <li class="list-group-item">runtime_minutes:  ${surpriseMe.getRuntimeMinutes()}</li>
+            <li class="list-group-item">Is adult:  ${surpriseMe.getIsAdult()?'Yes':'No'}</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Bootstrap -->
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.min.js"></script>
+
 </body>
 </html>
